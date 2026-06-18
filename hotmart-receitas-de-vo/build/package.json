@@ -1,0 +1,11 @@
+{
+  "name": "receitas-de-vo-criativos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gerador de criativos (carrosseis Instagram) para o e-book Receitas de Vo com Toque Funcional",
+  "dependencies": {
+    "puppeteer": "^23.0.0",
+    "sharp": "^0.33.0"
+  }
+}

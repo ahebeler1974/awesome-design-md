@@ -1,0 +1,4 @@
+# build tooling (regenerável com `npm install`)
+build/node_modules/
+build/_render.html
+.DS_Store
