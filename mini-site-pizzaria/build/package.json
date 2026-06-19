@@ -1,0 +1,6 @@
+{
+  "name": "mini-site-pizzaria-build",
+  "private": true,
+  "type": "module",
+  "dependencies": { "puppeteer": "^23.0.0", "sharp": "^0.33.0" }
+}
