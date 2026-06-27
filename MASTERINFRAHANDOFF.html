@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MASTER HANDOFF — Guia Casa Inteligente</title>
+<style>
+:root { --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --bg:#fff; --accent:#0969da; --code-bg:#f6f8fa; }
+* { box-sizing: border-box; }
+body { margin:0; background:#fff; color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Noto Sans,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size:16px; line-height:1.6; }
+.wrap { max-width:920px; margin:0 auto; padding:48px 40px 80px; }
+h1,h2,h3 { line-height:1.25; font-weight:600; margin-top:1.6em; margin-bottom:.6em; }
+h1 { font-size:2em; padding-bottom:.3em; border-bottom:2px solid var(--border); }
+h2 { font-size:1.5em; padding-bottom:.3em; border-bottom:1px solid var(--border); margin-top:2em; }
+h3 { font-size:1.2em; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+p,ul,ol { margin:.6em 0; }
+blockquote { margin:1em 0; padding:.4em 1em; color:var(--muted);
+  border-left:4px solid var(--border); background:#f6f8fa55; }
+blockquote p { margin:.3em 0; }
+table { border-collapse:collapse; width:100%; margin:1em 0; display:block; overflow-x:auto; font-size:.95em; }
+th,td { border:1px solid var(--border); padding:7px 12px; text-align:left; vertical-align:top; }
+th { background:var(--code-bg); font-weight:600; }
+tr:nth-child(2n) td { background:#f6f8fa55; }
+code { background:var(--code-bg); padding:.15em .4em; border-radius:6px; font-size:.88em;
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; }
+pre { background:var(--code-bg); padding:16px; border-radius:8px; overflow:auto; border:1px solid var(--border); }
+pre code { background:none; padding:0; font-size:.85em; line-height:1.45; }
+hr { border:0; border-top:1px solid var(--border); margin:2em 0; }
+.meta { color:var(--muted); font-size:.85em; margin-top:6px; }
+@media print {
+  .wrap { max-width:none; padding:0 8mm; }
+  h1,h2 { break-after:avoid; }
+  table,pre,blockquote { break-inside:avoid; }
+  a { color:var(--fg); }
+  @page { margin:14mm 10mm; size:A4; }
+}
+</style>
+</head>
+<body><div class="wrap">
+<h1>🧭 MASTER HANDOFF — Infraestrutura do Blog &quot;Guia Casa Inteligente&quot;</h1>
+<blockquote>
+<p><strong>Para quem é este arquivo:</strong> agentes (Claude Code) que vão <strong>terminar e arrumar toda a infra</strong> do
+blog de afiliados Mercado Livre <code>ahebeler.shop</code>. Contém: configuração completa, estado exato de cada
+artigo, o método técnico validado de gerar/inserir links, e a lista do que deve ser <strong>removido/corrigido</strong>.</p>
+<p><strong>Atualizado em:</strong> 2026-06-26 · <strong>Regra de ouro:</strong> link de afiliado SEMPRE direto no produto,
+NUNCA na vitrine <code>/social/</code>.</p>
+</blockquote>
+<hr>
+<h2>📊 Status (resumo de 10 segundos)</h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Artigos no total (01–20)</td>
+<td><strong>20</strong></td>
+</tr>
+<tr>
+<td>Publicados</td>
+<td><strong>2</strong> (01 + 02 — Iluminação)</td>
+</tr>
+<tr>
+<td>Rascunhos</td>
+<td><strong>18</strong> (artigos 03–20 · WordPress IDs 1001–1018)</td>
+</tr>
+<tr>
+<td>Artigos <strong>prontos</strong> (F=0, V=0)</td>
+<td><strong>7</strong> (03, 04, 05, 06, 07, 10, 20)</td>
+</tr>
+<tr>
+<td>Links oficiais inseridos</td>
+<td><strong>56</strong> (37 nos prontos + 19 nos parciais)</td>
+</tr>
+<tr>
+<td>Links na vitrine <code>/social/</code></td>
+<td><strong>0</strong> ✅ (meta permanente)</td>
+</tr>
+<tr>
+<td><strong>Botões pendentes</strong></td>
+<td><strong>36 em 11 artigos</strong> = 32 (escopo conhecido, 9 artigos) + 4 (2 descontinuados)</td>
+</tr>
+<tr>
+<td>Blockers</td>
+<td>2 produtos <strong>descontinuados</strong> (Allo W3 → art.14 · FR 500 → art.18) · copy travada (art.13) · &quot;Oferta do dia&quot; a decidir (art.09)</td>
+</tr>
+<tr>
+<td>Config pendente</td>
+<td>Rank Math reconectar · Search Console + sitemap · imagem destacada por post · purgar LiteSpeed</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Reconciliação dos pendentes:</strong> <code>32 (escopo conhecido: 08, 09, 11, 12, 13, 15, 16, 17, 19) + 4 (descontinuados: art.14 e art.18) = 36 botões em 11 artigos</code>. Desses 32, <strong>~8 slots ainda precisam ter o produto definido</strong> (marcados como &quot;a definir&quot; na <a href="#4c-n%C3%A3o-iniciados-links">§4c</a>). Os 4 botões dos descontinuados só entram <strong>depois</strong> de escolher o produto substituto (§5/§7). Veja o detalhe por artigo na <a href="#4-estado-atual-de-cada-artigo">§4</a>.</p>
+</blockquote>
+<h3>🔑 Legenda e ícones (usados em todo o documento)</h3>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L</strong></td>
+<td>Links de afiliado já inseridos no post (= contagem de <code>matt_tool</code>)</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>Botões <strong>pendentes</strong> = <code>&lt;a href=&quot;#COLAR-LINK-AFILIADO&quot;&gt;</code> + <code>&lt;mark&gt;</code> ainda sem link</td>
+</tr>
+<tr>
+<td><strong>V</strong></td>
+<td>Links na <strong>vitrine</strong> <code>/social/</code> — <strong>tem que ser 0 SEMPRE</strong></td>
+</tr>
+<tr>
+<td>✅</td>
+<td>Pronto / feito</td>
+</tr>
+<tr>
+<td>🔄</td>
+<td>Em progresso / faltam itens</td>
+</tr>
+<tr>
+<td>⬜</td>
+<td>Não iniciado</td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td>Atenção</td>
+</tr>
+<tr>
+<td>🚫 BLOCKER</td>
+<td>Bloqueio real (ex.: produto descontinuado)</td>
+</tr>
+<tr>
+<td>❌</td>
+<td>Proibido (nunca fazer)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Vocabulário único:</strong> &quot;botão pendente&quot; = &quot;F&quot; = &quot;placeholder&quot; = &quot;botão morto <code>href=&quot;#&quot;</code>&quot; — são a mesma coisa.
+No método (§3d), os contadores <code>matt_tool</code> / <code>COLAR-LINK-AFILIADO</code> / <code>/social/</code> correspondem exatamente a <strong>L / F / V</strong>.</p>
+</blockquote>
+<h3>🤖 O que um agente PODE vs NÃO PODE automatizar</h3>
+<ul>
+<li><strong>PODE:</strong> gerar e inserir links via clipboard + <code>wp.apiFetch</code> (§3), varrer <code>/social/</code>, contar <code>matt_tool</code>/<code>ua=</code>, editar conteúdo dos posts, remover placeholders.</li>
+<li><strong>NÃO PODE:</strong> digitar senha (login é <strong>humano</strong> — §1), <strong>fabricar</strong> o token <code>ua=</code> (§3a), escolher o <strong>produto substituto</strong> dos descontinuados, decidir a <strong>&quot;Oferta do dia&quot;</strong> do art.09.</li>
+</ul>
+<hr>
+<h2>Índice</h2>
+<ul>
+<li><a href="#1-configura%C3%A7%C3%A3o-do-ambiente">1. Configuração do ambiente</a><ul>
+<li><a href="#11-categorias-nome--slug">1.1 Categorias (nome → slug)</a></li>
+<li><a href="#12-afiliado-mercado-livre">1.2 Afiliado Mercado Livre</a></li>
+<li><a href="#13-reposit%C3%B3rio-com-o-conte%C3%BAdo-fonte-dos-artigos">1.3 Repositório com o conteúdo-fonte</a></li>
+</ul>
+</li>
+<li><a href="#2-mapa-dos-posts-id-do-wordpress--artigo">2. Mapa dos posts (ID do WordPress → artigo)</a></li>
+<li><a href="#3--m%C3%A9todo-validado--gerar-e-inserir-um-link">3. ⭐ Método validado — gerar e inserir um link</a><ul>
+<li><a href="#3a-gerar-o-link-oficial-rastreado">3a. Gerar o link oficial rastreado</a></li>
+<li><a href="#3b-extrair-o-link-via-automa%C3%A7%C3%A3o-clipboard">3b. Extrair o link via automação (clipboard)</a></li>
+<li><a href="#3c-inserir-no-wordpress-sess%C3%A3o-logada">3c. Inserir no WordPress (sessão logada)</a></li>
+<li><a href="#3d-validar">3d. Validar</a></li>
+</ul>
+</li>
+<li><a href="#4-estado-atual-de-cada-artigo">4. Estado atual de cada artigo</a><ul>
+<li><a href="#4a-prontos-f0-v0--7-artigos">4a. Prontos (F=0, V=0)</a></li>
+<li><a href="#4b-faltam-produtos">4b. Faltam produtos</a></li>
+<li><a href="#4c-n%C3%A3o-iniciados-links">4c. Não iniciados</a></li>
+<li><a href="#4d-produtos-j%C3%A1-linkados-mlb--auditoria">4d. Produtos já linkados (MLB — auditoria)</a></li>
+</ul>
+</li>
+<li><a href="#5-o-que-deve-ser-removido--corrigido">5. O que deve ser removido / corrigido</a></li>
+<li><a href="#6-ordem-de-publica%C3%A7%C3%A3o-por-silos">6. Ordem de publicação (por silos)</a></li>
+<li><a href="#7-checklist-final-do-agente">7. Checklist final do agente</a></li>
+</ul>
+<hr>
+<h2>1. Configuração do ambiente</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hospedagem</td>
+<td>Hostinger, plano Business (expira 2027-06-26)</td>
+</tr>
+<tr>
+<td>Domínio</td>
+<td><strong>ahebeler.shop</strong></td>
+</tr>
+<tr>
+<td>WordPress admin</td>
+<td><code>https://ahebeler.shop/wp-admin/</code></td>
+</tr>
+<tr>
+<td>Usuário admin</td>
+<td><code>ahebeler@gmail.com</code> (login deve ser feito pelo humano — agentes <strong>NÃO</strong> digitam senha)</td>
+</tr>
+<tr>
+<td>Título do site</td>
+<td><strong>Guia Casa Inteligente</strong></td>
+</tr>
+<tr>
+<td>Slogan</td>
+<td>&quot;O guia para escolher o produto certo para sua casa&quot;</td>
+</tr>
+<tr>
+<td>Idioma</td>
+<td>pt-BR</td>
+</tr>
+<tr>
+<td>Tema</td>
+<td><strong>GeneratePress</strong> (free)</td>
+</tr>
+<tr>
+<td>Plugins ativos</td>
+<td><strong>Rank Math SEO</strong>, <strong>LiteSpeed Cache</strong>, <strong>WordPress Importer</strong> (instalado p/ a importação)</td>
+</tr>
+<tr>
+<td>Permalinks</td>
+<td><code>/%postname%/</code></td>
+</tr>
+<tr>
+<td>Favicon</td>
+<td>já configurado (ícone de casa)</td>
+</tr>
+<tr>
+<td>WordPress</td>
+<td>versão 7.0</td>
+</tr>
+</tbody></table>
+<h3>1.1 Categorias (nome → slug)</h3>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Slug</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Iluminação Inteligente</td>
+<td><code>iluminacao-inteligente</code></td>
+</tr>
+<tr>
+<td>Segurança e Câmeras</td>
+<td><code>seguranca-e-cameras</code></td>
+</tr>
+<tr>
+<td>Robôs e Limpeza</td>
+<td><code>robos-e-limpeza</code></td>
+</tr>
+<tr>
+<td>Assistentes e Controle</td>
+<td><code>assistentes-e-controle</code></td>
+</tr>
+<tr>
+<td>Guias e Comparativos</td>
+<td><code>guias-e-comparativos</code></td>
+</tr>
+<tr>
+<td>Ofertas e Novidades</td>
+<td><code>ofertas-e-novidades</code></td>
+</tr>
+</tbody></table>
+<h3>1.2 Afiliado Mercado Livre</h3>
+<ul>
+<li><strong>Etiqueta (<code>matt_word</code>):</strong> <code>alexandrehebeler</code></li>
+<li><strong><code>matt_tool</code> (ID da ferramenta):</strong> <code>38524122</code></li>
+<li>Comissão varia por produto (ex.: eletrônicos ~5%; casa ~9–14%). Aparece em &quot;GANHOS X%&quot; na barra preta &quot;Afiliados&quot;.</li>
+<li>Cookie de 30 dias (último clique).</li>
+</ul>
+<h3>1.3 Repositório com o conteúdo-fonte dos artigos</h3>
+<ul>
+<li>Repo: <code>ahebeler1974/claude-design-premium</code></li>
+<li>Branch: <code>claude/mercado-livre-affiliate-blog-vdkgb1</code></li>
+<li>Pasta: <code>blog-casa-inteligente/</code> (artigos em <code>artigos/01..20.md</code>, páginas em <code>paginas/</code>)</li>
+</ul>
+<hr>
+<h2>2. Mapa dos posts (ID do WordPress → artigo)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Slug</th>
+<th>Artigo</th>
+<th>Estado (<a href="#4-estado-atual-de-cada-artigo">§4</a>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1001</td>
+<td>fechadura-digital-biometria-apartamento</td>
+<td>03 Fechadura biometria</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>robo-aspirador-casa-com-pelo-de-cachorro</td>
+<td>04 Robô pet</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>camera-wifi-vigiar-pet-em-casa</td>
+<td>05 Câmera pet</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>tomada-inteligente-desligar-ar-condicionado</td>
+<td>06 Tomada</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1005</td>
+<td>comparativo-robos-aspiradores-ate-1500</td>
+<td>07 Comparativo robôs</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1006</td>
+<td>kit-casa-inteligente-para-iniciantes</td>
+<td>08 Kit iniciantes</td>
+<td>🔄 faltam produtos</td>
+</tr>
+<tr>
+<td>1007</td>
+<td>echo-dot-vale-a-pena-promo</td>
+<td>09 Echo Dot promo</td>
+<td>🔄 falta &quot;Oferta do dia&quot;</td>
+</tr>
+<tr>
+<td>1008</td>
+<td>comparativo-cameras-seguranca-wifi-ate-300</td>
+<td>10 Comparativo câmeras</td>
+<td>✅ pronto</td>
+</tr>
+<tr>
+<td>1009</td>
+<td>sensor-presenca-inteligente-luz-automatica</td>
+<td>11 Sensor presença</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>interruptor-inteligente-sem-neutro</td>
+<td>12 Interruptor sem neutro</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1011</td>
+<td>alexa-vs-google-nest-comparativo</td>
+<td>13 Alexa vs Nest</td>
+<td>🔄 refazer copy</td>
+</tr>
+<tr>
+<td>1012</td>
+<td>campainha-camera-wifi-apartamento</td>
+<td>14 Campainha</td>
+<td>🚫 descontinuado</td>
+</tr>
+<tr>
+<td>1013</td>
+<td>robo-aspirador-passa-pano-ate-2000</td>
+<td>15 Robô passa-pano</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1014</td>
+<td>controle-universal-inteligente-ar-tv</td>
+<td>16 Controle IR</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1015</td>
+<td>fitas-led-inteligentes-quarto-gamer-alexa</td>
+<td>17 Fitas LED</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1016</td>
+<td>fechadura-digital-senha-cartao-escritorio</td>
+<td>18 Fechadura escritório</td>
+<td>🚫 descontinuado</td>
+</tr>
+<tr>
+<td>1017</td>
+<td>central-automacao-residencial-casa-grande</td>
+<td>19 Central automação</td>
+<td>⬜ não iniciado</td>
+</tr>
+<tr>
+<td>1018</td>
+<td>sensor-fumaca-gas-inteligente-celular</td>
+<td>20 Sensor fumaça</td>
+<td>✅ pronto</td>
+</tr>
+</tbody></table>
+<p>Os <strong>18</strong> acima são <strong>rascunhos</strong>. Os artigos <strong>01 e 02</strong> (Iluminação) já estão <strong>publicados</strong> e por isso não aparecem na tabela.</p>
+<blockquote>
+<p>⚠️ <strong>Lacuna do handoff:</strong> os IDs/slugs dos artigos publicados <strong>01 e 02 não constam</strong> neste documento. Buscar no wp-admin quando precisar deles (não inventar IDs).</p>
+</blockquote>
+<hr>
+<h2>3. ⭐ Método validado — gerar e inserir um link</h2>
+<blockquote>
+<p><strong>CRÍTICO.</strong> Este é o único caminho que paga comissão <strong>E</strong> cai direto no produto. Não trocar o método.</p>
+</blockquote>
+<h3>3a. Gerar o link oficial rastreado</h3>
+<ol>
+<li>Estar <strong>logado como afiliado</strong> no Mercado Livre (barra preta &quot;Afiliados&quot; no topo do produto).</li>
+<li>Abrir a <strong>página do produto</strong> (<code>/p/MLBxxxxxxx</code>).</li>
+<li>No bloco do produto, clicar em <strong>&quot;Compartilhar&quot; (o do breadcrumb, NÃO o botão azul da barra preta)</strong> → no menu, <strong>&quot;Copiar link&quot;</strong>.</li>
+<li>O link copiado tem o formato:
+<code>https://www.mercadolivre.com.br/&lt;slug&gt;/p/MLBxxxx?pdp_filters=...&amp;matt_tool=38524122&amp;ua=&lt;TOKEN&gt;</code><ul>
+<li>O <strong><code>ua=&lt;TOKEN&gt;</code></strong> é a assinatura oficial — <strong>não pode ser fabricada</strong>; só sai do &quot;Copiar link&quot;.</li>
+<li>Pode descartar o fragmento depois de <code>#</code>.</li>
+</ul>
+</li>
+</ol>
+<p>❌ <strong>NÃO usar:</strong> o botão azul &quot;Compartilhar&quot; da barra preta nem o &quot;Gerador de produtos recomendados&quot; → ambos geram <code>meli.la/...</code> que <strong>redireciona pra vitrine <code>/social/alexandrehebeler</code></strong> (converte menos). Qualquer URL com <code>/social/</code> está <strong>ERRADA</strong>.</p>
+<h3>3b. Extrair o link via automação (clipboard)</h3>
+<p>Após clicar &quot;Copiar link&quot;, ler <code>await navigator.clipboard.readText()</code> no contexto da aba do produto.</p>
+<ul>
+<li><strong>Sempre localizar pelo <code>getBoundingClientRect()</code></strong> do elemento com texto exato &quot;Compartilhar&quot; e <code>y&gt;100</code>
+(o de <code>y≈27</code> é o <strong>errado</strong>, da barra preta). A posição do &quot;Compartilhar&quot; do breadcrumb varia (~x 1333, y 177–225) — esses números são só uma dica de partida.</li>
+<li>&quot;Copiar link&quot; abre em ~`(x+19, y+91)` a partir do &quot;Compartilhar&quot; — use como <strong>fallback aproximado</strong>; o clique fixo erra, então <strong>sempre confira pelo rect</strong>.</li>
+<li><strong>Sempre validar</strong> que o link contém <code>/p/MLB&lt;id-esperado&gt;</code> <strong>e</strong> <code>ua=</code> antes de usar (o clipboard pode reter o link anterior se o clique falhar).</li>
+</ul>
+<h3>3c. Inserir no WordPress (sessão logada)</h3>
+<p>Numa aba já logada em <code>ahebeler.shop/wp-admin</code>, usar <code>wp.apiFetch</code> (nonce automático):</p>
+<pre><code class="language-js">// 1. GET conteúdo (precisa ser .raw — markup dos blocos Gutenberg, NUNCA .rendered)
+const p = await wp.apiFetch({ path: `/wp/v2/posts/${id}?context=edit&amp;_fields=content` });
+
+// 2. Parsear e substituir
+const doc = new DOMParser().parseFromString(p.content.raw, &#39;text/html&#39;);
+[...doc.querySelectorAll(&#39;a&#39;)]
+  .filter(a =&gt; (a.getAttribute(&#39;href&#39;) || &#39;&#39;).includes(&#39;COLAR-LINK-AFILIADO&#39;))
+  .forEach(a =&gt; {
+    // achar o &lt;mark&gt; irmão seguinte (até 6 nós) -&gt; nome do produto
+    let mark = null, n = a.nextElementSibling, hops = 0;
+    while (n &amp;&amp; hops &lt; 6) {
+      if (n.tagName === &#39;MARK&#39;) { mark = n; break; }
+      n = n.nextElementSibling; hops++;
+    }
+    // se o nome em mark.textContent casar com o produto-alvo (use include + exclude):
+    a.setAttribute(&#39;href&#39;, LINK_OFICIAL);
+    a.setAttribute(&#39;target&#39;, &#39;_blank&#39;);
+    a.setAttribute(&#39;rel&#39;, &#39;nofollow sponsored noopener&#39;);
+    if (mark) mark.remove(); // remove o destaque amarelo
+  });
+
+// 3. UPDATE (devolve o innerHTML; preserva os comentários &lt;!-- wp:... --&gt; dos blocos)
+await wp.apiFetch({ path: `/wp/v2/posts/${id}`, method: &#39;POST&#39;, data: { content: doc.body.innerHTML } });
+</code></pre>
+<ul>
+<li>Cada botão pendente é um <code>&lt;a href=&quot;#COLAR-LINK-AFILIADO&quot;&gt;🛒 Ver preço no Mercado Livre&lt;/a&gt;</code> seguido de
+<code>&lt;mark ...&gt;⚠️ COLE AQUI O LINK DE AFILIADO (PRODUTO, não vitrine): NOME DO PRODUTO&lt;/mark&gt;</code>.</li>
+<li>O <strong>NOME no <code>&lt;mark&gt;</code></strong> diz qual produto é aquele botão. O filtro <code>.includes(&#39;COLAR-LINK-AFILIADO&#39;)</code> casa
+com o <code>href=&quot;#COLAR-LINK-AFILIADO&quot;</code> de propósito (ignora o <code>#</code> à frente — é mais robusto).</li>
+<li>⚠️ <strong>Round-trip do conteúdo:</strong> use <code>p.content.raw</code> no GET e <code>doc.body.innerHTML</code> no UPDATE. <strong>Nunca</strong> use
+<code>.rendered</code> nem remova os comentários <code>&lt;!-- wp:... --&gt;</code> — isso corrompe a estrutura de blocos Gutenberg.</li>
+<li>⚠️ Cuidado com chaves ambíguas: &quot;echo dot&quot; casa com &quot;Echo Dot Max&quot; e &quot;com relógio&quot;; use <strong>include + exclude</strong>.</li>
+<li>⚠️ Preservar sempre <code>rel=&quot;nofollow sponsored noopener&quot;</code> + <code>target=&quot;_blank&quot;</code> (divulgação de afiliado + segurança da nova aba). Não &quot;simplificar&quot;.</li>
+</ul>
+<h3>3d. Validar</h3>
+<p>Por post, contar (e relacionar com a legenda <strong>L / F / V</strong> da §4):</p>
+<table>
+<thead>
+<tr>
+<th>Contador</th>
+<th>Significado</th>
+<th>Esperado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>matt_tool</code></td>
+<td><strong>L</strong> — nº de links inseridos</td>
+<td>= nº de botões que deviam ter link</td>
+</tr>
+<tr>
+<td><code>ua=</code></td>
+<td>nº de assinaturas oficiais</td>
+<td><strong>= contagem de <code>matt_tool</code></strong> (todo link oficial tem os dois)</td>
+</tr>
+<tr>
+<td><code>COLAR-LINK-AFILIADO</code></td>
+<td><strong>F</strong> — botões ainda pendentes</td>
+<td><strong>0</strong> ao publicar</td>
+</tr>
+<tr>
+<td><code>/social/</code></td>
+<td><strong>V</strong> — links na vitrine</td>
+<td><strong>0</strong> sempre</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Um link com <code>matt_tool</code> mas <strong>sem <code>ua=</code></strong> (ex.: URL editada à mão) é inválido — por isso <code>ua=</code> entra na validação.</p>
+</blockquote>
+<hr>
+<h2>4. Estado atual de cada artigo</h2>
+<p><em>(validado em 2026-06-26)</em> — Legenda <strong>L / F / V</strong> no <a href="#-legenda-e-%C3%ADcones-usados-em-todo-o-documento">topo</a>.</p>
+<h3>4a. Prontos (F=0, V=0) — 7 artigos</h3>
+<table>
+<thead>
+<tr>
+<th>Artigo</th>
+<th>L (links)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>03 Fechadura biometria</td>
+<td>4</td>
+</tr>
+<tr>
+<td>04 Robô pet</td>
+<td>4</td>
+</tr>
+<tr>
+<td>05 Câmera pet</td>
+<td>5</td>
+</tr>
+<tr>
+<td>06 Tomada</td>
+<td>4</td>
+</tr>
+<tr>
+<td>07 Comparativo robôs</td>
+<td>6</td>
+</tr>
+<tr>
+<td>10 Comparativo câmeras</td>
+<td>10</td>
+</tr>
+<tr>
+<td>20 Sensor fumaça</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Soma</strong></td>
+<td><strong>37</strong></td>
+</tr>
+</tbody></table>
+<h3>4b. Faltam produtos</h3>
+<blockquote>
+<p>⚠️ Onde os produtos nomeados forem <strong>menos</strong> que F, os botões restantes precisam ter o produto
+identificado pelo <strong>NOME no <code>&lt;mark&gt;</code></strong> dentro do artigo (§3c) — <strong>não inventar</strong> modelos.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Artigo</th>
+<th>L/F</th>
+<th>Produtos que FALTAM linkar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>08 Kit iniciantes</td>
+<td>4/3</td>
+<td><strong>Tapo L530E</strong> (cat: MLB65246849) · <strong>Positivo Lâmpada RGB E27</strong> · <strong>sensor de abertura/presença Alexa</strong> <em>(3 de 3 nomeados ✅)</em></td>
+</tr>
+<tr>
+<td>09 Echo Dot promo</td>
+<td>6/1</td>
+<td><strong>&quot;Oferta do dia&quot;</strong> — decisão do dono (promo do momento)</td>
+</tr>
+<tr>
+<td>13 Alexa vs Nest</td>
+<td>5/1</td>
+<td><strong>Echo Show 5 3ª ger</strong> (cat: MLB39376694 — copy travou; refazer)</td>
+</tr>
+<tr>
+<td>14 Campainha</td>
+<td>2/2</td>
+<td>2 botões, ambos a definir: 🚫 <strong>Intelbras Allo W3 — DESCONTINUADO</strong> → escolher substituto (ex.: Allo WT7) · <strong>+ 1 produto que não consta</strong></td>
+</tr>
+<tr>
+<td>18 Fechadura escritório</td>
+<td>2/2</td>
+<td>2 botões, ambos a definir: 🚫 <strong>Intelbras FR 500 — DESCONTINUADO</strong> → escolher substituto (ex.: linha FR atual/IFR) · <strong>+ 1 produto que não consta</strong></td>
+</tr>
+</tbody></table>
+<h3>4c. Não iniciados (links)</h3>
+<table>
+<thead>
+<tr>
+<th>Artigo</th>
+<th>L/F</th>
+<th>Produtos nomeados (parcial — ver aviso da §4b)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>11 Sensor presença</td>
+<td>0/3</td>
+<td>Sensor Wi-Fi AGL · Sensor PIR Tuya/Smart Life · <strong>(1 produto a definir — não consta)</strong></td>
+</tr>
+<tr>
+<td>12 Interruptor sem neutro</td>
+<td>0/4</td>
+<td>SONOFF ZBMINI-L2 · Interruptor Touch EKAZA T3074 · Interruptor Touch EKAZA T1074 · <strong>(1 produto a definir — não consta)</strong></td>
+</tr>
+<tr>
+<td>15 Robô passa-pano</td>
+<td>0/6</td>
+<td>Xiaomi S20+ · Xiaomi S40 · WAP W3000 · KaBuM 700 · Mondial Fast Clean RB-04 · <strong>(1 produto a definir — não consta)</strong></td>
+</tr>
+<tr>
+<td>16 Controle IR</td>
+<td>0/4</td>
+<td>BroadLink RM4 Pro · Controle IR Tuya/Smart Life NovaDigital · <strong>(2 produtos a definir — não constam)</strong></td>
+</tr>
+<tr>
+<td>17 Fitas LED</td>
+<td>0/6</td>
+<td>Tapo L920-5 · Govee RGBIC · Tapo L900-5 · Intelbras Izy EFLS 6050 · Positivo Fita LED RGB · <strong>(1 produto a definir — não consta)</strong></td>
+</tr>
+<tr>
+<td>19 Central automação</td>
+<td>0/4</td>
+<td>Aqara Hub M3 · Intelbras ICA 1001 · <strong>(2 produtos a definir — não constam)</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Soma de F (botões pendentes):</strong> 4b = <code>3+1+1+2+2 = 9</code> · 4c = <code>3+4+6+4+6+4 = 27</code> → <strong>36 no total, em 11 artigos</strong>
+(08, 09, 11, 12, 13, 14, 15, 16, 17, 18, 19). Desses, <strong>32</strong> estão em <strong>9</strong> artigos de escopo conhecido
+(08, 09, 11, 12, 13, 15, 16, 17, 19) — porém <strong>~8 desses slots ainda precisam ter o produto definido</strong> (ver
+os marcadores &quot;a definir&quot; abaixo) — e <strong>4</strong> dependem de resolver os descontinuados em <strong>2</strong> artigos (14, 18).
+<strong>Nota T3074/T1074:</strong> contados aqui como 2 modelos distintos; se forem o mesmo, faltam 2 (não 1) em definir no art.12.</p>
+</blockquote>
+<p><strong>Totais:</strong> 56 links oficiais inseridos · 0 na vitrine · <strong>36 botões pendentes em 11 artigos</strong> (= 32 em artigos de escopo conhecido + 4 descontinuados).</p>
+<h3>4d. Produtos já linkados (MLB — auditoria)</h3>
+<blockquote>
+<p>Lista de <strong>produtos únicos</strong> (24) já usados. O total de <strong>56 links</strong> é maior porque o mesmo produto
+aparece em vários artigos/slots (ex.: Echo Dot 5 reutilizado nos slots &quot;com relógio&quot; do art.09).</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>MLB</th>
+<th>Produto</th>
+<th>MLB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S40C</td>
+<td><code>MLB63436594</code></td>
+<td>Tapo C500</td>
+<td><code>MLB23037572</code></td>
+</tr>
+<tr>
+<td>WAP W100</td>
+<td><code>MLB15711832</code></td>
+<td>FR 220</td>
+<td><code>MLB21868709</code></td>
+</tr>
+<tr>
+<td>KaBuM 700</td>
+<td><code>MLB36621174</code></td>
+<td>Papaiz SL140B</td>
+<td><code>MLB45455332</code></td>
+</tr>
+<tr>
+<td>WAP W1000</td>
+<td><code>MLB40340788</code></td>
+<td>Tapo D230S1</td>
+<td><code>MLB2037210121</code></td>
+</tr>
+<tr>
+<td>Xiaomi E10</td>
+<td><code>MLB24237954</code></td>
+<td>Yale YDF 30</td>
+<td><code>MLB26632299</code></td>
+</tr>
+<tr>
+<td>Velds 3em1</td>
+<td><code>MLB50359112</code></td>
+<td>IDF 620</td>
+<td><code>MLB22723641</code></td>
+</tr>
+<tr>
+<td>Tapo C200</td>
+<td><code>MLB18593981</code></td>
+<td>Sensor Tuya fumaça</td>
+<td><code>MLB38934647</code></td>
+</tr>
+<tr>
+<td>Mibo iM4 C</td>
+<td><code>MLB22569962</code></td>
+<td>EKAZA 20A</td>
+<td><code>MLB25132713</code></td>
+</tr>
+<tr>
+<td>Tapo C210</td>
+<td><code>MLB19663400</code></td>
+<td>Positivo Smart Plug 16A</td>
+<td><code>MLB23061221</code></td>
+</tr>
+<tr>
+<td>Xiaomi Smart C200</td>
+<td><code>MLB59824659</code></td>
+<td>Echo Dot 5</td>
+<td><code>MLB46024018</code></td>
+</tr>
+<tr>
+<td>Mibo iM3 C</td>
+<td><code>MLB18596028</code></td>
+<td>Echo Pop</td>
+<td><code>MLB62304347</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Echo Dot Max</td>
+<td><code>MLB60085379</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Nest Mini</td>
+<td><code>MLB2073784404</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Nota (art.09):</strong> os slots &quot;com relógio&quot; usaram o link do <strong>Echo Dot 5 padrão</strong> (anúncios &quot;com relógio&quot; não têm &quot;Compartilhar&quot; de afiliado). Trocar se quiser o exato.</li>
+<li>⚠️ <strong>Auditar:</strong> &quot;KaBuM 700&quot; aparece tanto aqui (<code>MLB36621174</code>, já linkado) quanto como produto a linkar no art.15 — confirmar se é o mesmo botão (possível duplicidade).</li>
+</ul>
+<hr>
+<h2>5. O que deve ser removido / corrigido</h2>
+<h3>5a. Remover (limpeza)</h3>
+<ol>
+<li><strong>&quot;Built with GeneratePress&quot; do rodapé</strong> — é o copyright padrão do tema. Remover via filtro
+<code>generate_copyright</code> (snippet em functions.php / Code Snippets) ou ocultar via CSS e pôr copyright próprio.
+Ex.: <code>add_filter(&#39;generate_copyright&#39;, fn() =&gt; &#39;© 2026 Guia Casa Inteligente&#39;);</code></li>
+<li><strong>Marcadores de placeholder restantes</strong> nos artigos pendentes: todo <code>href=&quot;#COLAR-LINK-AFILIADO&quot;</code> e todo
+<code>&lt;mark&gt;⚠️ COLE AQUI O LINK DE AFILIADO...&lt;/mark&gt;</code> devem sumir conforme os links forem inseridos
+(NÃO publicar artigo com placeholder visível).</li>
+<li><strong>Blocos <code>[Opcional — sua experiência ...]</code></strong> (em <code>&lt;em&gt;</code>) — preencher com experiência real OU remover.</li>
+<li><strong>Notas internas</strong> que possam ter sobrado no corpo (ex.: &quot;(publique também esse artigo...)&quot;).</li>
+<li><strong>Plugin &quot;WordPress Importer&quot;</strong> pode ser desativado/removido após terminar as importações (opcional).</li>
+<li><strong>Item no Lixo (1)</strong> — esvaziar se for rascunho automático inútil.</li>
+</ol>
+<h3>5b. Nunca permitir (regra permanente)</h3>
+<ul>
+<li><strong>Nenhum link com <code>/social/</code></strong> (vitrine) nos botões de compra. Varredura: <code>grep</code> por <code>/social/</code> em todo post = <strong>0</strong>.</li>
+<li>Nenhum botão &quot;morto&quot; (<code>href=&quot;#...&quot;</code>) publicado.</li>
+</ul>
+<h3>5c. Corrigir / configurar</h3>
+<ol>
+<li><strong>Rank Math:</strong> aparece aviso &quot;o URL do site foi alterado… reconectar&quot; no topo do wp-admin → clicar pra reconectar (efeito da troca de domínio).</li>
+<li><strong>Google Search Console:</strong> conectar e enviar sitemap (<code>/sitemap_index.xml</code>).</li>
+<li><strong>Cache LiteSpeed:</strong> após qualquer alteração de tema/conteúdo, <strong>purgar</strong> (LiteSpeed → Toolbox → &quot;Limpar tudo - LSCache&quot;). <em>(O bug de marca &quot;ahebeler.shop&quot; vs &quot;Guia Casa Inteligente&quot; era cache velho — já corrigido.)</em></li>
+<li><strong>Imagem destacada</strong> em cada post (alt = palavra-chave) antes de publicar.</li>
+<li><strong>Cada post tem Rank Math preenchido</strong> (título, meta, keyword vieram do import) — conferir nota 80+.</li>
+</ol>
+<h3>5d. Design / polimento (pendente)</h3>
+<ul>
+<li>Padronizar os cards da seção <strong>&quot;Últimos reviews e comparativos&quot;</strong> na home (hoje o alinhamento texto+miniatura fica torto). Provável via CSS ou bloco do GenerateBlocks.</li>
+<li>(Opcional) Logo/wordmark próprio no header (hoje é texto).</li>
+</ul>
+<hr>
+<h2>6. Ordem de publicação (por silos)</h2>
+<p>Publicar review + comparativo da mesma categoria juntos (ativa links internos):</p>
+<ol>
+<li>✅ <strong>Iluminação:</strong> 01 + 02 (já no ar)</li>
+<li><strong>Robôs:</strong> 04 + 07 (prontos) → depois 15</li>
+<li><strong>Segurança:</strong> 05 + 10 (prontos) → 03 (pronto) → 14, 18, 20</li>
+<li><strong>Assistentes/Ofertas:</strong> 09 + 08 + 06 → 13, 16</li>
+<li><strong>Iluminação/automação de iluminação:</strong> 11, 12, 17</li>
+<li><strong>Guias:</strong> 19</li>
+</ol>
+<hr>
+<h2>7. Checklist final do agente</h2>
+<ol>
+<li><strong>Terminar os 36 botões pendentes</strong> (<a href="#4-estado-atual-de-cada-artigo">§4</a>) usando o método da <a href="#3--m%C3%A9todo-validado--gerar-e-inserir-um-link">§3</a>:<ul>
+<li><strong>32 em artigos de escopo conhecido</strong> — 08, 09, 11, 12, 13, 15, 16, 17, 19 (alguns slots ainda precisam do produto definido — ver <a href="#4c-n%C3%A3o-iniciados-links">§4c</a>).</li>
+<li><strong>4 nos descontinuados</strong> — artigos 14 e 18, <strong>após</strong> o item 2.</li>
+</ul>
+</li>
+<li><strong>Resolver os 2 descontinuados</strong> (Allo W3 → art.14; FR 500 → art.18) com substituto atual (decisão humana).</li>
+<li><strong>Remover</strong> o que está na <a href="#5a-remover-limpeza">§5a</a> (principalmente &quot;Built with GeneratePress&quot; e placeholders).</li>
+<li><strong>Configurar</strong> Rank Math (reconectar) + Search Console + sitemap (<a href="#5c-corrigir--configurar">§5c</a>).</li>
+<li><strong>Imagem destacada</strong> + revisão de opinião em cada post.</li>
+<li><strong>Validar</strong> (0 <code>/social/</code>, 0 placeholder, <code>ua=</code> = <code>matt_tool</code>) e <strong>publicar por silos</strong> (<a href="#6-ordem-de-publica%C3%A7%C3%A3o-por-silos">§6</a>).</li>
+<li><strong>Purgar o cache LiteSpeed</strong> ao final.</li>
+</ol>
+
+<hr>
+<p class="meta">Documento gerado a partir de MASTERINFRAHANDOFF.md · Guia Casa Inteligente (ahebeler.shop).</p>
+</div></body>
+</html>
