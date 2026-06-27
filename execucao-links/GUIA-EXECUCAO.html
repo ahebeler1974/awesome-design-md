@@ -1,0 +1,210 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Guia de Execução — Guia Casa Inteligente</title>
+<style>:root { --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --bg:#fff; --accent:#0969da; --code-bg:#f6f8fa; }
+* { box-sizing: border-box; }
+body { margin:0; background:#fff; color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Noto Sans,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size:16px; line-height:1.6; }
+.wrap { max-width:920px; margin:0 auto; padding:48px 40px 80px; }
+h1,h2,h3 { line-height:1.25; font-weight:600; margin-top:1.6em; margin-bottom:.6em; }
+h1 { font-size:2em; padding-bottom:.3em; border-bottom:2px solid var(--border); }
+h2 { font-size:1.5em; padding-bottom:.3em; border-bottom:1px solid var(--border); margin-top:2em; }
+h3 { font-size:1.2em; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+p,ul,ol { margin:.6em 0; }
+li { margin:.2em 0; }
+blockquote { margin:1em 0; padding:.4em 1em; color:var(--muted);
+  border-left:4px solid var(--border); background:#f6f8fa55; }
+blockquote p { margin:.3em 0; }
+table { border-collapse:collapse; width:100%; margin:1em 0; display:block; overflow-x:auto; font-size:.95em; }
+th,td { border:1px solid var(--border); padding:7px 12px; text-align:left; vertical-align:top; }
+th { background:var(--code-bg); font-weight:600; }
+tr:nth-child(2n) td { background:#f6f8fa55; }
+code { background:var(--code-bg); padding:.15em .4em; border-radius:6px; font-size:.88em;
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; }
+pre { background:var(--code-bg); padding:16px; border-radius:8px; overflow:auto; border:1px solid var(--border); }
+pre code { background:none; padding:0; font-size:.82em; line-height:1.45; }
+hr { border:0; border-top:1px solid var(--border); margin:2em 0; }
+.meta { color:var(--muted); font-size:.85em; margin-top:6px; }
+input[type=checkbox] { margin-right:.5em; }
+@media print {
+  .wrap { max-width:none; padding:0 8mm; }
+  h1,h2,h3 { break-after:avoid; }
+  table,pre,blockquote { break-inside:avoid; }
+  a { color:var(--fg); }
+  @page { margin:14mm 10mm; size:A4; }
+}
+</style></head><body><div class="wrap"><h1>🛠️ Guia de Execução — Inserir links e publicar (Guia Casa Inteligente)</h1>
+<blockquote>
+<p><strong>O que é isto:</strong> o passo a passo prático para <strong>terminar os links de afiliado</strong> e <strong>publicar</strong> os posts,
+usando o método validado do <a href="../MASTERINFRAHANDOFF.md"><code>MASTERINFRAHANDOFF.md</code></a>. Pensado para rodar
+num <strong>navegador logado</strong> (seu, ou um ambiente com a sua sessão) — <strong>não</strong> num agente de nuvem isolado.</p>
+<p>Acompanha o script <a href="./inserir-links.js"><code>inserir-links.js</code></a>.</p>
+</blockquote>
+<hr>
+<h2>⚠️ Pré-requisitos (sem isto, NADA funciona)</h2>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Por quê</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Rede liberada</strong> para <code>ahebeler.shop</code> e <code>mercadolivre.com.br</code></td>
+<td>Ambientes de nuvem fechados bloqueiam esses hosts (testado: 403). Rode na sua máquina ou num ambiente com política de rede aberta.</td>
+</tr>
+<tr>
+<td><strong>Login no <code>wp-admin</code></strong> (humano digita a senha)</td>
+<td>O <code>wp.apiFetch</code> usa o <em>nonce</em> da sessão logada. Agentes <strong>não</strong> digitam senha.</td>
+</tr>
+<tr>
+<td><strong>Login de afiliado no Mercado Livre</strong></td>
+<td>O token <code>ua=</code> <strong>só</strong> sai do &quot;Copiar link&quot; estando logado; <strong>não pode ser fabricado</strong>.</td>
+</tr>
+<tr>
+<td><strong>Dados do handoff</strong> (§2 IDs, §4 produtos/MLB)</td>
+<td>Dizem qual post e qual produto é cada botão.</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>🤖 <strong>Agente PODE:</strong> extrair o link (clipboard) e inserir via <code>apiFetch</code>, contar/validar.
+<strong>Agente NÃO PODE:</strong> digitar a senha, fabricar o <code>ua=</code>, escolher substituto de produto descontinuado, decidir a &quot;Oferta do dia&quot;.</p>
+</blockquote>
+<hr>
+<h2>Visão geral do fluxo</h2>
+<pre><code>Para cada post pendente (ver §4 do handoff):
+  1. Gerar os links oficiais no Mercado Livre (§3a/§3b)         ← sessão de afiliado
+  2. Preencher o array LINKS do inserir-links.js
+  3. Rodar em DRY-RUN no console do wp-admin                    ← sessão do wp-admin
+  4. Conferir a tabela → aplicar  run({ dryRun:false })
+  5. validar()  → F=0, V=0, ua==matt_tool
+Depois de todos os posts: limpeza do tema, imagem destacada, publicar por silos, purgar cache.
+</code></pre>
+<hr>
+<h2>Parte A — Gerar o link oficial (Mercado Livre logado)</h2>
+<p>Para <strong>cada produto</strong> de um botão pendente:</p>
+<ol>
+<li>Esteja <strong>logado como afiliado</strong> (barra preta &quot;Afiliados&quot; no topo do produto).</li>
+<li>Abra a <strong>página do produto</strong> (<code>/p/MLBxxxxxxx</code>).</li>
+<li>Clique em <strong>&quot;Compartilhar&quot; do breadcrumb</strong> (NÃO o botão azul da barra preta) → <strong>&quot;Copiar link&quot;</strong>.</li>
+<li>O link copiado tem <code>...&amp;matt_tool=38524122&amp;ua=&lt;TOKEN&gt;</code>. Guarde-o.<ul>
+<li>❌ Se vier <code>meli.la/...</code> ou contiver <code>/social/</code>, está <strong>errado</strong> (vitrine) — refaça pelo &quot;Compartilhar&quot; do breadcrumb.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Automação opcional do clipboard</strong> (no console da aba do produto):</p>
+<pre><code class="language-js">// localizar o &quot;Compartilhar&quot; certo pelo retângulo (o de y≈27 é o errado, da barra preta)
+const el = [...document.querySelectorAll(&#39;*&#39;)]
+  .find(n =&gt; n.textContent.trim() === &#39;Compartilhar&#39; &amp;&amp; n.getBoundingClientRect().y &gt; 100);
+el?.scrollIntoView({block:&#39;center&#39;}); el?.click();
+// clicar em &quot;Copiar link&quot; no menu que abrir, então:
+const link = await navigator.clipboard.readText();
+console.log(/\/p\/MLB\d+/.test(link) &amp;&amp; /ua=/.test(link) ? &#39;✅ &#39; + link : &#39;❌ link suspeito: &#39; + link);
+</code></pre>
+<blockquote>
+<p>Sempre confira pelo retângulo (clique em posição fixa erra) e valide que o link tem <code>/p/MLB&lt;id&gt;</code> <strong>e</strong> <code>ua=</code> antes de usar.</p>
+</blockquote>
+<hr>
+<h2>Parte B — Inserir no WordPress (wp-admin logado)</h2>
+<ol>
+<li>Abra uma aba <strong>logada</strong> em <code>https://ahebeler.shop/wp-admin</code> (qualquer tela do admin).</li>
+<li>Abra o console (<strong>F12 → Console</strong>).</li>
+<li>Abra <a href="./inserir-links.js"><code>inserir-links.js</code></a> e <strong>edite</strong>:<ul>
+<li><code>POST_ID</code> → o ID do post (<a href="../MASTERINFRAHANDOFF.md#2-mapa-dos-posts-id-do-wordpress--artigo">§2 do handoff</a>).</li>
+<li><code>LINKS</code> → um item por botão: <code>inc</code>/<code>exc</code> para casar com o NOME no <code>&lt;mark&gt;</code>, e o <code>href</code> oficial da Parte A.</li>
+</ul>
+</li>
+<li><strong>Cole o arquivo inteiro</strong> e Enter → roda em <strong>DRY-RUN</strong> (não salva). Confira a tabela impressa.</li>
+<li>Se estiver certo: <code>run({ dryRun: false })</code> → aplica e salva.</li>
+<li><code>validar()</code> → confere <strong>F=0, V=0, ua==matt_tool</strong>.</li>
+</ol>
+<blockquote>
+<p>💡 O script acha o <code>&lt;mark&gt;</code> irmão de cada botão, casa o produto por <code>inc</code>/<code>exc</code> (ignora acento/caixa),
+troca o <code>href</code>, põe <code>rel=&quot;nofollow sponsored noopener&quot;</code> + <code>target=&quot;_blank&quot;</code> e remove o <code>&lt;mark&gt;</code>.
+Usa <code>content.raw</code> (markup de blocos Gutenberg) — <strong>nunca</strong> <code>.rendered</code>.</p>
+</blockquote>
+<h3>Exemplo de <code>LINKS</code></h3>
+<pre><code class="language-js">const POST_ID = 1009; // 09 Echo Dot promo
+const LINKS = [
+  { inc: [&#39;echo dot&#39;, &#39;5&#39;], exc: [&#39;max&#39;, &#39;relogio&#39;], href: &#39;https://www.mercadolivre.com.br/.../p/MLB46024018?...&amp;matt_tool=38524122&amp;ua=TOKEN1&#39; },
+  { inc: [&#39;echo pop&#39;],       exc: [],                 href: &#39;https://www.mercadolivre.com.br/.../p/MLB62304347?...&amp;matt_tool=38524122&amp;ua=TOKEN2&#39; },
+];
+</code></pre>
+<hr>
+<h2>✅ Checklist por post (gates antes de publicar)</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>F = 0</strong> — nenhum <code>COLAR-LINK-AFILIADO</code> restante (nenhum botão morto <code>href=&quot;#&quot;</code>).</li>
+<li><input disabled="" type="checkbox"> <strong>V = 0</strong> — nenhum link com <code>/social/</code> (vitrine).</li>
+<li><input disabled="" type="checkbox"> <strong>ua == matt_tool</strong> — todo link oficial tem os dois (link sem <code>ua=</code> é inválido).</li>
+<li><input disabled="" type="checkbox"> Todo <code>href</code> cai em <code>/p/MLB&lt;id&gt;</code> do <strong>produto certo</strong> (confira a coluna <code>mlb</code> da tabela do dry-run).</li>
+<li><input disabled="" type="checkbox"> <code>&lt;mark&gt;</code> de destaque amarelo <strong>removidos</strong> (o script faz isso ao aplicar).</li>
+<li><input disabled="" type="checkbox"> Blocos <code>[Opcional — sua experiência ...]</code> preenchidos <strong>ou</strong> removidos.</li>
+<li><input disabled="" type="checkbox"> Sem notas internas sobradas no corpo.</li>
+<li><input disabled="" type="checkbox"> <strong>Imagem destacada</strong> definida (alt = palavra-chave).</li>
+<li><input disabled="" type="checkbox"> <strong>Rank Math</strong> com nota 80+ (título, meta, keyword).</li>
+</ul>
+<blockquote>
+<p>Atalho de validação no console: <code>validar()</code> imprime L / ua / F / V e marca ✅/❌ automaticamente.</p>
+</blockquote>
+<hr>
+<h2>Checklist final do site (depois de todos os posts)</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Remover <strong>&quot;Built with GeneratePress&quot;</strong> do rodapé (<code>add_filter(&#39;generate_copyright&#39;, fn() =&gt; &#39;© 2026 Guia Casa Inteligente&#39;);</code>).</li>
+<li><input disabled="" type="checkbox"> <strong>Rank Math:</strong> reconectar (aviso de URL alterada após troca de domínio).</li>
+<li><input disabled="" type="checkbox"> <strong>Search Console:</strong> conectar + enviar sitemap (<code>/sitemap_index.xml</code>).</li>
+<li><input disabled="" type="checkbox"> Resolver os <strong>2 descontinuados</strong>: Allo W3 → art.14 · FR 500 → art.18 (escolher substituto atual).</li>
+<li><input disabled="" type="checkbox"> Decidir a <strong>&quot;Oferta do dia&quot;</strong> do art.09 e a copy travada do art.13 (Echo Show 5).</li>
+<li><input disabled="" type="checkbox"> <strong>Publicar por silos</strong> (<a href="../MASTERINFRAHANDOFF.md#6-ordem-de-publica%C3%A7%C3%A3o-por-silos">§6 do handoff</a>).</li>
+<li><input disabled="" type="checkbox"> <strong>Purgar o cache LiteSpeed</strong> ao final (Toolbox → &quot;Limpar tudo - LSCache&quot;).</li>
+<li><input disabled="" type="checkbox"> Varredura global: <code>grep &quot;/social/&quot;</code> em todos os posts = <strong>0</strong>.</li>
+</ul>
+<hr>
+<h2>Apêndice — <code>inserir-links.js</code> (referência)</h2>
+<blockquote>
+<p>Arquivo executável: <a href="./inserir-links.js"><code>inserir-links.js</code></a>. Reproduzido aqui para leitura no PDF.</p>
+</blockquote>
+<pre><code class="language-js">// ===== CONFIG (edite por post) =====
+const POST_ID = 1009;                 // ID do WordPress (§2 do handoff)
+const LINKS = [
+  // { inc: [&#39;echo dot&#39;,&#39;5&#39;], exc: [&#39;max&#39;,&#39;relogio&#39;], href: &#39;https://.../p/MLB46024018?...&amp;matt_tool=38524122&amp;ua=...&#39; },
+];
+
+// ===== Helpers =====
+const _norm = s =&gt; (s||&#39;&#39;).toLowerCase().normalize(&#39;NFD&#39;).replace(/[̀-ͯ]/g,&#39;&#39;).trim();
+const _matchRule = (name, r) =&gt;
+  (r.inc||[]).every(t =&gt; _norm(name).includes(_norm(t))) &amp;&amp;
+  (r.exc||[]).every(t =&gt; !_norm(name).includes(_norm(t)));
+function _findMark(a){ let n=a.nextElementSibling,h=0; while(n&amp;&amp;h&lt;6){ if(n.tagName===&#39;MARK&#39;)return n; n=n.nextElementSibling; h++; } return null; }
+const _linkValido = h =&gt; /\/p\/MLB\d+/.test(h) &amp;&amp; /[?&amp;]ua=/.test(h) &amp;&amp; /matt_tool=38524122/.test(h) &amp;&amp; !h.includes(&#39;/social/&#39;);
+
+// ===== Execução =====
+async function run({ dryRun = true } = {}) {
+  const p = await wp.apiFetch({ path: `/wp/v2/posts/${POST_ID}?context=edit&amp;_fields=content` });
+  const doc = new DOMParser().parseFromString(p.content.raw, &#39;text/html&#39;);
+  const anchors = [...doc.querySelectorAll(&#39;a&#39;)].filter(a =&gt; (a.getAttribute(&#39;href&#39;)||&#39;&#39;).includes(&#39;COLAR-LINK-AFILIADO&#39;));
+  for (const a of anchors) {
+    const mark = _findMark(a);
+    const rule = LINKS.find(r =&gt; _matchRule(mark ? mark.textContent : &#39;&#39;, r));
+    if (!rule || !_linkValido(rule.href)) continue;
+    if (!dryRun) {
+      a.setAttribute(&#39;href&#39;, rule.href);
+      a.setAttribute(&#39;target&#39;, &#39;_blank&#39;);
+      a.setAttribute(&#39;rel&#39;, &#39;nofollow sponsored noopener&#39;);
+      if (mark) mark.remove();
+    }
+  }
+  if (!dryRun) await wp.apiFetch({ path: `/wp/v2/posts/${POST_ID}`, method: &#39;POST&#39;, data: { content: doc.body.innerHTML } });
+}
+
+// ===== Validação =====
+async function validar(postId = POST_ID) {
+  const { content } = await wp.apiFetch({ path: `/wp/v2/posts/${postId}?context=edit&amp;_fields=content` });
+  const n = re =&gt; (content.raw.match(re) || []).length;
+  return { L: n(/matt_tool=38524122/g), ua: n(/[?&amp;]ua=/g), F: n(/COLAR-LINK-AFILIADO/g), V: n(/\/social\//g) };
+}
+</code></pre>
+
+<hr><p class="meta">Documento gerado a partir de GUIA-EXECUCAO.md · Guia Casa Inteligente.</p>
+</div></body></html>
