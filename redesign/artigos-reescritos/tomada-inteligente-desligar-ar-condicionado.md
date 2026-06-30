@@ -1,7 +1,7 @@
 # Tomada Inteligente para Desligar o Ar-Condicionado pelo Celular: Funciona? (Guia Honesto 2026)
 
 > **Meta title (60):** Tomada Inteligente Desliga o Ar-Condicionado? Guia 2026
-> **Meta description (155):** Tomada inteligente desliga o ar-condicionado pelo celular? Funciona, mas só corta a energia. Para ligar e ajustar temperatura, o certo é um controle IR. Veja.
+> **Meta description (155):** Tomada inteligente desliga o ar-condicionado pelo celular? Funciona, mas só corta a energia. Para ajustar temperatura, o certo é um controle IR. Veja.
 > **Imagem destacada (ideia):** Mão segurando um celular com app de casa inteligente aberto, ao fundo um ar-condicionado split na parede de uma sala clara, e em primeiro plano uma tomada inteligente plugada — composição 16:9, luz natural de fim de tarde.
 > **Alt da imagem:** "Pessoa desligando o ar-condicionado split pelo celular com tomada inteligente e controle infravermelho, casa inteligente 2026"
 > **Categoria:** Assistentes e Controle · **Formato:** Guia honesto / Como fazer
