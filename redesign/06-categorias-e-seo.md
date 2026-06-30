@@ -110,8 +110,8 @@ Title: Guias de Casa Inteligente | Guia Casa Inteligente
 Description: Comparativos X vs Y e listas dos melhores até R$N, com tabela no topo e veredito direto. Compare de cabeça fria e compre o produto certo de primeira.
 
 **Ofertas e Novidades (categoria)**
-Title: Ofertas de Casa Inteligente e Novidades | Guia Casa Inteligente
-Description: Quedas de preço selecionadas, lançamentos e oportunidades do Mercado Livre com curadoria honesta. Salve a página e garanta o melhor preço. Veja as ofertas.
+Title: Ofertas de Casa Inteligente | Guia Casa Inteligente
+Description: Quedas de preço selecionadas, lançamentos e oportunidades do Mercado Livre com curadoria honesta. Salve a página e garanta o melhor preço. Veja já.
 
 ---
 
