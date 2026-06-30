@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Casa Inteligente — Reviews e Comparativos Honestos</title>
+<meta name="description" content="Reviews honestos de casa inteligente: lâmpadas, câmeras, robôs e assistentes comparados com critérios claros e veredito sem rodeio. Escolha sem errar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gci-ink:#0B1220;
+  --gci-ink-soft:#475569;
+  --gci-navy-900:#091A2E;
+  --gci-navy-800:#0C2236;
+  --gci-blue:#2563EB;
+  --gci-blue-600:#1D4ED8;
+  --gci-cyan:#06B6D4;
+  --gci-teal:#0EA5A4;
+  --gci-cta:#15A24A;
+  --gci-cta-600:#0F7E39;
+  --gci-cta-glow:rgba(21,162,74,.35);
+  --gci-amber:#F59E0B;
+  --gci-bg:#F4F7FB;
+  --gci-surface:#FFFFFF;
+  --gci-border:#E4EAF2;
+  --gci-shadow:0 10px 30px -12px rgba(9,26,46,.18);
+  --gci-shadow-hover:0 20px 45px -15px rgba(9,26,46,.28);
+  --gci-radius:16px;
+  --gci-radius-sm:10px;
+  --gci-grad-hero:linear-gradient(135deg,#091A2E 0%,#0C2236 45%,#0E3A5C 100%);
+  --gci-grad-brand:linear-gradient(90deg,#2563EB 0%,#06B6D4 100%);
+  --gci-grad-cta:linear-gradient(90deg,#15A24A 0%,#22C55E 100%);
+  --gci-font-display:"Sora","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --gci-font-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--gci-font-sans);
+  font-size:17px;
+  line-height:1.7;
+  color:var(--gci-ink);
+  background:var(--gci-bg);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{
+  outline:3px solid #fff;
+  box-shadow:0 0 0 6px var(--gci-cyan);
+  border-radius:6px;
+}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{font-family:var(--gci-font-display);letter-spacing:-.02em;line-height:1.18}
+
+.gci-wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ============ FLOATING PREVIEW BADGE ============ */
+.gci-preview-badge{
+  position:fixed;top:18px;right:18px;z-index:1000;
+  background:var(--gci-amber);color:#1a1100;
+  font-family:var(--gci-font-display);font-weight:800;font-size:12.5px;
+  letter-spacing:.02em;padding:9px 15px;border-radius:999px;
+  box-shadow:0 8px 24px -6px rgba(245,158,11,.6);
+  border:1.5px solid rgba(255,255,255,.45);
+}
+
+/* ============ HEADER ============ */
+.gci-header{
+  background:var(--gci-grad-hero);
+  position:sticky;top:0;z-index:900;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  box-shadow:0 6px 24px -12px rgba(0,0,0,.5);
+}
+.gci-header-inner{
+  display:flex;align-items:center;gap:24px;
+  height:68px;
+}
+.gci-logo{flex-shrink:0}
+.gci-logo svg{height:46px;width:auto}
+.gci-nav{
+  display:flex;align-items:center;gap:4px;margin-left:auto;
+  flex-wrap:nowrap;
+}
+.gci-nav a{
+  font-family:var(--gci-font-display);font-weight:600;font-size:14.5px;
+  color:#cdd9e8;padding:8px 13px;border-radius:8px;
+  white-space:nowrap;transition:.18s;position:relative;
+}
+.gci-nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.gci-nav a::after{
+  content:"";position:absolute;left:13px;right:13px;bottom:3px;height:2px;
+  background:var(--gci-cyan);border-radius:2px;transform:scaleX(0);
+  transform-origin:left;transition:.2s;
+}
+.gci-nav a:hover::after{transform:scaleX(1)}
+.gci-search{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;padding:7px 14px;flex-shrink:0;transition:.18s;
+}
+.gci-search:focus-within{background:rgba(255,255,255,.14);border-color:var(--gci-cyan)}
+.gci-search svg{width:16px;height:16px;stroke:#9fb4cc}
+.gci-search input{
+  background:none;border:none;outline:none;color:#fff;
+  font-family:var(--gci-font-sans);font-size:14px;width:120px;
+}
+.gci-search input::placeholder{color:#8aa0bb}
+
+/* burger menu (CSS-only, checkbox technique) — hidden on desktop */
+.gci-menu-checkbox{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.gci-burger{
+  display:none;margin-left:auto;flex-shrink:0;cursor:pointer;
+  width:42px;height:42px;border-radius:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  align-items:center;justify-content:center;flex-direction:column;gap:4px;
+}
+.gci-burger span{display:block;width:20px;height:2px;border-radius:2px;background:#cdd9e8;transition:.18s}
+.gci-search-mobile{display:none}
+
+/* ============ HERO ============ */
+.gci-hero{
+  background:var(--gci-grad-hero);
+  color:#fff;position:relative;overflow:hidden;
+  padding:78px 0 88px;
+}
+.gci-hero::before{
+  content:"";position:absolute;top:-160px;right:-120px;width:560px;height:560px;
+  background:radial-gradient(circle,rgba(6,182,212,.22) 0%,transparent 62%);
+  pointer-events:none;
+}
+.gci-hero::after{
+  content:"";position:absolute;bottom:-200px;left:-140px;width:520px;height:520px;
+  background:radial-gradient(circle,rgba(37,99,235,.20) 0%,transparent 62%);
+  pointer-events:none;
+}
+.gci-hero-inner{position:relative;z-index:2;max-width:820px}
+.gci-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--gci-font-display);font-weight:600;font-size:13px;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:#7fdfee;background:rgba(6,182,212,.12);
+  border:1px solid rgba(6,182,212,.3);
+  padding:6px 14px;border-radius:999px;margin-bottom:24px;
+}
+.gci-hero h1{
+  font-size:clamp(34px,5.2vw,58px);font-weight:800;
+  line-height:1.06;margin-bottom:22px;
+}
+.gci-hero h1 .hl{
+  background:var(--gci-grad-brand);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;
+}
+.gci-hero-sub{
+  font-size:18.5px;color:#c4d2e3;max-width:660px;margin-bottom:34px;
+}
+.gci-hero-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px}
+.gci-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--gci-font-display);font-weight:700;font-size:16px;
+  padding:15px 28px;border-radius:12px;cursor:pointer;border:none;
+  transition:.2s;text-align:center;
+}
+.gci-btn-cta{
+  background:var(--gci-grad-cta);color:#fff;
+  box-shadow:0 10px 30px -8px var(--gci-cta-glow);
+}
+.gci-btn-cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px var(--gci-cta-glow)}
+.gci-btn-ghost{
+  background:rgba(255,255,255,.06);color:#fff;
+  border:1.5px solid rgba(255,255,255,.28);
+}
+.gci-btn-ghost:hover{background:rgba(255,255,255,.13);border-color:var(--gci-cyan)}
+.gci-hero-trust{
+  display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:14.5px;color:#a9bcd2;
+}
+.gci-hero-trust span{display:inline-flex;align-items:center;gap:7px}
+
+/* ============ STATS BAR ============ */
+.gci-stats{
+  background:var(--gci-surface);
+  margin:-44px auto 0;position:relative;z-index:5;
+  max-width:1100px;border-radius:var(--gci-radius);
+  box-shadow:var(--gci-shadow);border:1px solid var(--gci-border);
+  padding:30px 20px;
+}
+.gci-stats-title{
+  text-align:center;font-family:var(--gci-font-display);font-weight:700;
+  font-size:15px;color:var(--gci-ink-soft);margin-bottom:22px;
+  letter-spacing:.01em;
+}
+.gci-stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.gci-stat{text-align:center;padding:6px 12px;position:relative}
+.gci-stat:not(:last-child)::after{
+  content:"";position:absolute;right:0;top:14%;height:72%;width:1px;
+  background:var(--gci-border);
+}
+.gci-stat-num{
+  font-family:var(--gci-font-display);font-weight:800;
+  font-size:34px;line-height:1;
+  background:var(--gci-grad-brand);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.gci-stat-num.small{
+  font-size:19px;line-height:1.25;
+  background:none;-webkit-background-clip:border-box;background-clip:border-box;
+  -webkit-text-fill-color:currentColor;color:var(--gci-blue-600);
+}
+.gci-stat-label{font-size:13.5px;color:var(--gci-ink-soft);line-height:1.4}
+
+/* ============ SECTIONS ============ */
+.gci-section{padding:64px 0}
+.gci-section-head{margin-bottom:36px;max-width:720px}
+.gci-section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.gci-section-head h2{
+  font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-bottom:12px;
+}
+.gci-section-head p{font-size:17.5px;color:var(--gci-ink-soft)}
+.gci-kicker{
+  font-family:var(--gci-font-display);font-weight:700;font-size:13px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--gci-blue);
+  margin-bottom:10px;display:block;
+}
+
+/* ============ "COMECE POR AQUI" CARDS ============ */
+.gci-start-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+}
+.gci-start-card{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);padding:26px 22px;
+  box-shadow:var(--gci-shadow);transition:.22s;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.gci-start-card:hover{transform:translateY(-5px);box-shadow:var(--gci-shadow-hover);border-color:#cdd9ea}
+.gci-start-emoji{font-size:30px;margin-bottom:14px;line-height:1}
+.gci-start-card h3{font-size:18px;font-weight:700;margin-bottom:9px}
+.gci-start-card p{font-size:14.5px;color:var(--gci-ink-soft);flex:1}
+.gci-start-arrow{
+  margin-top:16px;font-family:var(--gci-font-display);font-weight:700;
+  font-size:14px;color:var(--gci-blue);display:inline-flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.gci-start-card:hover .gci-start-arrow{gap:11px}
+
+/* ============ CATEGORY CARDS ============ */
+.gci-cat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.gci-card{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);overflow:hidden;
+  box-shadow:var(--gci-shadow);transition:.24s;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.gci-card:hover{transform:translateY(-6px);box-shadow:var(--gci-shadow-hover)}
+.gci-thumb{
+  aspect-ratio:16/9;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.gci-thumb-label{
+  position:relative;z-index:2;text-align:center;color:#fff;
+  font-family:var(--gci-font-display);font-weight:700;
+  padding:0 18px;text-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+.gci-thumb-label .ico{font-size:42px;display:block;margin-bottom:8px}
+.gci-thumb-label .txt{font-size:18px;line-height:1.2}
+.gci-thumb::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(9,26,46,.05),rgba(9,26,46,.4));
+}
+.gci-thumb.t1{background:linear-gradient(135deg,#F59E0B,#FBBF24)}
+.gci-thumb.t2{background:linear-gradient(135deg,#1D4ED8,#06B6D4)}
+.gci-thumb.t3{background:linear-gradient(135deg,#0EA5A4,#22C55E)}
+.gci-thumb.t4{background:linear-gradient(135deg,#7C3AED,#2563EB)}
+.gci-thumb.t5{background:linear-gradient(135deg,#0C2236,#0E3A5C)}
+.gci-thumb.t6{background:linear-gradient(135deg,#DC2626,#F59E0B)}
+.gci-card-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.gci-pill{
+  align-self:flex-start;font-family:var(--gci-font-display);font-weight:700;
+  font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--gci-blue-600);background:rgba(37,99,235,.09);
+  padding:5px 11px;border-radius:999px;margin-bottom:12px;
+}
+.gci-card-body h3{font-size:19px;font-weight:700;margin-bottom:9px}
+.gci-card-body p{font-size:14.5px;color:var(--gci-ink-soft);flex:1}
+.gci-card-foot{
+  margin-top:16px;display:flex;align-items:center;justify-content:space-between;
+}
+.gci-card-link{
+  font-family:var(--gci-font-display);font-weight:700;font-size:14px;
+  color:var(--gci-blue);display:inline-flex;align-items:center;gap:6px;transition:.2s;
+}
+.gci-card:hover .gci-card-link{gap:11px}
+
+/* ============ REVIEW CARDS (mais lidos) ============ */
+.gci-review-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.gci-readtime{
+  font-size:13px;color:var(--gci-ink-soft);display:inline-flex;align-items:center;gap:5px;
+}
+.gci-stars{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:700;color:var(--gci-ink)}
+.gci-stars .s{color:var(--gci-amber);font-size:15px;letter-spacing:-1px}
+.gci-updated{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--gci-font-display);font-weight:600;font-size:12px;
+  color:#92660a;background:rgba(255,255,255,.94);
+  padding:4px 10px;border-radius:999px;
+  box-shadow:0 2px 8px -2px rgba(9,26,46,.25);
+  position:absolute;top:12px;left:12px;z-index:3;
+}
+
+/* ============ "COMO AVALIAMOS" ============ */
+.gci-method{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);
+  padding:40px;
+}
+.gci-method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:8px}
+.gci-method-item{display:flex;gap:16px}
+.gci-method-ico{
+  flex-shrink:0;width:48px;height:48px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(6,182,212,.1));
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.gci-method-item h4{font-size:16.5px;font-weight:700;margin-bottom:5px}
+.gci-method-item p{font-size:14.5px;color:var(--gci-ink-soft)}
+.gci-method-cta{margin-top:30px}
+.gci-link-strong{
+  font-family:var(--gci-font-display);font-weight:700;font-size:16px;
+  color:var(--gci-blue);display:inline-flex;align-items:center;gap:8px;transition:.2s;
+}
+.gci-link-strong:hover{gap:13px}
+
+/* ============ NEWSLETTER ============ */
+.gci-news{
+  background:var(--gci-grad-brand);border-radius:var(--gci-radius);
+  padding:48px 44px;color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 20px 50px -18px rgba(37,99,235,.5);
+}
+.gci-news::before{
+  content:"";position:absolute;top:-80px;right:-60px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);
+}
+.gci-news-inner{position:relative;z-index:2;max-width:640px}
+.gci-news h2{font-size:clamp(24px,3vw,32px);font-weight:800;margin-bottom:12px;color:#fff}
+.gci-news p{font-size:17px;color:rgba(255,255,255,.92);margin-bottom:24px}
+.gci-news-form{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.gci-news-form input{
+  flex:1;min-width:240px;font-family:var(--gci-font-sans);font-size:16px;
+  padding:15px 20px;border-radius:12px;border:none;outline:none;color:var(--gci-ink);
+}
+.gci-news-form button{
+  font-family:var(--gci-font-display);font-weight:700;font-size:16px;
+  padding:15px 26px;border-radius:12px;border:none;cursor:pointer;
+  background:#fff;color:var(--gci-navy-900);transition:.2s;white-space:nowrap;
+}
+.gci-news-form button:hover{transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(0,0,0,.3)}
+.gci-news-micro{font-size:13.5px;color:rgba(255,255,255,.85)}
+
+/* ============ FOOTER ============ */
+.gci-footer{
+  background:var(--gci-navy-900);color:#b4c4d8;padding:56px 0 30px;margin-top:20px;
+}
+.gci-footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:48px;margin-bottom:36px;
+}
+.gci-footer .gci-logo svg{height:52px;margin-bottom:16px}
+.gci-footer-about{font-size:15px;color:#9fb2c8;max-width:420px;line-height:1.65}
+.gci-footer-nav h4{
+  font-family:var(--gci-font-display);font-weight:700;font-size:14px;
+  color:#fff;margin-bottom:14px;letter-spacing:.03em;
+}
+.gci-footer-nav ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.gci-footer-nav a{font-size:14.5px;color:#9fb2c8;transition:.18s}
+.gci-footer-nav a:hover{color:var(--gci-cyan)}
+.gci-disclosure{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:18px 22px;font-size:13.5px;color:#8ca0b8;
+  line-height:1.65;margin-bottom:24px;font-style:italic;
+}
+.gci-disclosure strong{color:#c4d6ea;font-style:normal}
+.gci-copyright{
+  border-top:1px solid rgba(255,255,255,.08);padding-top:22px;
+  font-size:13.5px;color:#7e93ac;text-align:center;
+}
+
+/* ============ DIVIDER ============ */
+.gci-divider{
+  background:var(--gci-grad-hero);color:#fff;text-align:center;
+  padding:46px 24px;position:relative;overflow:hidden;
+}
+.gci-divider::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(6,182,212,.18),transparent 60%);
+}
+.gci-divider-inner{position:relative;z-index:2}
+.gci-divider .tag{
+  display:inline-block;font-family:var(--gci-font-display);font-weight:700;font-size:12.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:#7fdfee;
+  background:rgba(6,182,212,.14);border:1px solid rgba(6,182,212,.3);
+  padding:6px 16px;border-radius:999px;margin-bottom:16px;
+}
+.gci-divider h2{font-size:clamp(24px,3.2vw,34px);font-weight:800;margin-bottom:8px}
+.gci-divider p{color:#b4c4d8;font-size:16.5px}
+
+/* ============ ARTICLE ============ */
+.gci-article{max-width:820px;margin:0 auto;padding:48px 24px 80px}
+.gci-breadcrumb{
+  font-size:13.5px;color:var(--gci-ink-soft);margin-bottom:20px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+}
+.gci-breadcrumb a{color:var(--gci-blue);font-weight:600}
+.gci-breadcrumb a:hover{text-decoration:underline}
+.gci-breadcrumb .sep{color:#b9c6d6}
+.gci-article-pill{
+  display:inline-block;font-family:var(--gci-font-display);font-weight:700;
+  font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--gci-blue-600);background:rgba(37,99,235,.09);
+  padding:5px 13px;border-radius:999px;margin-bottom:16px;
+}
+.gci-article h1{
+  font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.1;margin-bottom:18px;
+}
+.gci-article-meta{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
+  font-size:14px;color:var(--gci-ink-soft);margin-bottom:22px;
+  padding-bottom:22px;border-bottom:1px solid var(--gci-border);
+}
+.gci-article-meta .by{font-weight:600;color:var(--gci-ink)}
+.gci-article-meta .dot{width:4px;height:4px;border-radius:50%;background:#c2cedd}
+.gci-meta-updated{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--gci-font-display);font-weight:600;font-size:12.5px;
+  color:#92660a;background:rgba(245,158,11,.13);padding:4px 11px;border-radius:999px;
+}
+.gci-affiliate-note{
+  font-size:13.5px;color:var(--gci-ink-soft);font-style:italic;
+  background:#eef3f9;border-left:3px solid var(--gci-cyan);
+  padding:12px 16px;border-radius:0 var(--gci-radius-sm) var(--gci-radius-sm) 0;
+  margin-bottom:30px;
+}
+
+.gci-article p{margin-bottom:20px;color:#1f2a3a}
+.gci-article h2{font-size:clamp(23px,3vw,30px);font-weight:800;margin:42px 0 16px}
+.gci-article h3{font-size:21px;font-weight:700;margin:28px 0 12px}
+
+/* TL;DR */
+.gci-tldr{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-left:5px solid var(--gci-cyan);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);
+  padding:26px 28px;margin:30px 0;
+}
+.gci-tldr-tag{
+  font-family:var(--gci-font-display);font-weight:800;font-size:12.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gci-teal);
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+}
+.gci-tldr p{margin-bottom:10px;font-size:16px}
+.gci-tldr ul{margin:0;padding-left:20px}
+.gci-tldr li{margin-bottom:8px;font-size:15.5px;color:#1f2a3a}
+.gci-tldr li strong{color:var(--gci-ink)}
+
+/* COMPARISON TABLE */
+.gci-table-wrap{
+  overflow-x:auto;margin:28px 0;border-radius:var(--gci-radius);
+  border:1px solid var(--gci-border);box-shadow:var(--gci-shadow);
+}
+.gci-table{width:100%;border-collapse:collapse;min-width:560px;background:var(--gci-surface)}
+.gci-table th,.gci-table td{padding:15px 18px;text-align:left;font-size:15px;border-bottom:1px solid var(--gci-border)}
+.gci-table thead th{
+  background:var(--gci-grad-hero);color:#fff;
+  font-family:var(--gci-font-display);font-weight:700;font-size:14.5px;
+}
+.gci-table thead th:first-child{border-top-left-radius:var(--gci-radius)}
+.gci-table thead th:last-child{border-top-right-radius:var(--gci-radius)}
+.gci-table tbody tr:nth-child(even){background:#fafbfd}
+.gci-table tbody tr:hover{background:#eef3f9}
+.gci-table td:first-child{font-weight:700;color:var(--gci-ink)}
+.gci-table .win{
+  display:inline-block;font-size:11px;font-weight:700;color:#0F7E39;
+  background:rgba(21,162,74,.12);padding:2px 8px;border-radius:999px;margin-left:6px;
+  font-family:var(--gci-font-display);
+}
+.gci-cell-check{color:var(--gci-cta);font-weight:700}
+.gci-cell-x{color:#cbd3de;font-weight:700}
+
+/* BEST CHOICE BOXES */
+.gci-best-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+.gci-best{
+  border-radius:var(--gci-radius);padding:22px;
+  border:1.5px solid;position:relative;background:var(--gci-surface);
+  box-shadow:var(--gci-shadow);
+}
+.gci-best.win{border-color:rgba(21,162,74,.4);background:linear-gradient(180deg,rgba(21,162,74,.05),var(--gci-surface))}
+.gci-best.value{border-color:rgba(37,99,235,.4);background:linear-gradient(180deg,rgba(37,99,235,.05),var(--gci-surface))}
+.gci-best.avoid{border-color:rgba(245,158,11,.45);background:linear-gradient(180deg,rgba(245,158,11,.06),var(--gci-surface))}
+.gci-best-tag{
+  font-family:var(--gci-font-display);font-weight:800;font-size:12px;
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:7px;
+}
+.gci-best.win .gci-best-tag{color:#0F7E39}
+.gci-best.value .gci-best-tag{color:var(--gci-blue-600)}
+.gci-best.avoid .gci-best-tag{color:#b07407}
+.gci-best h4{font-size:18px;font-weight:700;margin-bottom:8px}
+.gci-best p{font-size:14.5px;color:var(--gci-ink-soft);margin-bottom:0}
+
+/* PROS / CONS */
+.gci-proscons{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.gci-pc{
+  border-radius:var(--gci-radius);padding:24px;border:1px solid var(--gci-border);
+  background:var(--gci-surface);box-shadow:var(--gci-shadow);
+}
+.gci-pc.pros{border-top:4px solid var(--gci-cta)}
+.gci-pc.cons{border-top:4px solid #EF4444}
+.gci-pc h4{
+  font-family:var(--gci-font-display);font-weight:800;font-size:16px;
+  display:flex;align-items:center;gap:9px;margin-bottom:14px;
+}
+.gci-pc.pros h4{color:#0F7E39}
+.gci-pc.cons h4{color:#DC2626}
+.gci-pc ul{list-style:none}
+.gci-pc li{
+  font-size:14.5px;color:#1f2a3a;padding:7px 0 7px 28px;position:relative;line-height:1.5;
+}
+.gci-pc li::before{position:absolute;left:0;top:7px;font-weight:700;font-size:15px}
+.gci-pc.pros li::before{content:"✓";color:var(--gci-cta)}
+.gci-pc.cons li::before{content:"✕";color:#EF4444}
+
+/* SCORE BARS */
+.gci-scores{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);
+  padding:28px 30px;margin:28px 0;
+}
+.gci-score-row{margin-bottom:18px}
+.gci-score-row:last-child{margin-bottom:0}
+.gci-score-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.gci-score-head .crit{font-family:var(--gci-font-display);font-weight:600;font-size:14.5px}
+.gci-score-head .val{font-family:var(--gci-font-display);font-weight:800;font-size:15px;color:var(--gci-ink)}
+.gci-bar{height:9px;border-radius:999px;background:#e8eef6;overflow:hidden}
+.gci-bar span{
+  display:block;height:100%;border-radius:999px;
+  background:var(--gci-grad-brand);
+}
+.gci-bar.green span{background:var(--gci-grad-cta)}
+
+/* MAIN CTA */
+.gci-cta-box{
+  background:linear-gradient(135deg,#091A2E,#0E3A5C);
+  border-radius:var(--gci-radius);padding:32px;margin:32px 0;
+  text-align:center;color:#fff;box-shadow:var(--gci-shadow-hover);
+}
+.gci-cta-box h3{font-size:21px;font-weight:700;color:#fff;margin-bottom:6px}
+.gci-cta-box .sub{font-size:15px;color:#b4c4d8;margin-bottom:20px}
+.gci-cta-ml{
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--gci-font-display);font-weight:800;font-size:18px;
+  background:var(--gci-grad-cta);color:#fff;
+  padding:17px 34px;border-radius:14px;cursor:pointer;border:none;
+  box-shadow:0 14px 36px -8px var(--gci-cta-glow);transition:.22s;
+}
+.gci-cta-ml:hover{transform:translateY(-3px);box-shadow:0 22px 50px -10px var(--gci-cta-glow)}
+.gci-cta-ml svg{width:22px;height:22px;stroke:#fff}
+.gci-cta-trust{
+  margin-top:14px;font-size:13px;color:#9fb2c8;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;
+}
+.gci-cta-trust span{display:inline-flex;align-items:center;gap:5px}
+
+/* FAQ */
+.gci-faq{margin:26px 0}
+.gci-faq details{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius-sm);margin-bottom:12px;overflow:hidden;
+  box-shadow:0 4px 14px -8px rgba(9,26,46,.12);transition:.2s;
+}
+.gci-faq details[open]{border-color:#cdd9ea;box-shadow:var(--gci-shadow)}
+.gci-faq summary{
+  cursor:pointer;list-style:none;padding:18px 22px;
+  font-family:var(--gci-font-display);font-weight:700;font-size:16.5px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.gci-faq summary::-webkit-details-marker{display:none}
+.gci-faq summary::after{
+  content:"+";font-size:24px;font-weight:400;color:var(--gci-blue);
+  flex-shrink:0;transition:.2s;line-height:1;
+}
+.gci-faq details[open] summary::after{transform:rotate(45deg)}
+.gci-faq summary:hover{color:var(--gci-blue)}
+.gci-faq-body{padding:0 22px 20px;font-size:15.5px;color:#1f2a3a;line-height:1.65}
+
+/* VERDICT */
+.gci-verdict{
+  background:linear-gradient(135deg,rgba(14,165,164,.08),rgba(37,99,235,.06));
+  border:1.5px solid rgba(14,165,164,.3);
+  border-radius:var(--gci-radius);padding:30px 32px;margin:34px 0;
+}
+.gci-verdict-tag{
+  font-family:var(--gci-font-display);font-weight:800;font-size:13px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--gci-teal);
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+}
+.gci-verdict h3{font-size:22px;font-weight:800;margin-bottom:10px}
+.gci-verdict p{font-size:16px;color:#1f2a3a;margin-bottom:0}
+
+/* LEIA TAMBEM */
+.gci-related{margin:38px 0 10px}
+.gci-related h3{font-size:20px;font-weight:700;margin-bottom:16px}
+.gci-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gci-related-card{
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius-sm);padding:16px 18px;transition:.2s;cursor:pointer;
+  box-shadow:0 4px 14px -8px rgba(9,26,46,.12);
+}
+.gci-related-card:hover{transform:translateY(-3px);box-shadow:var(--gci-shadow);border-color:#cdd9ea}
+.gci-related-card .rc-pill{font-size:11px;font-weight:700;color:var(--gci-blue);text-transform:uppercase;letter-spacing:.04em;font-family:var(--gci-font-display)}
+.gci-related-card h4{font-size:15.5px;font-weight:700;margin-top:7px;line-height:1.3}
+
+/* STICKY FOOTER CTA */
+.gci-sticky-cta{
+  position:sticky;bottom:0;z-index:600;
+  background:var(--gci-surface);border-top:1px solid var(--gci-border);
+  box-shadow:0 -10px 30px -12px rgba(9,26,46,.2);
+  padding:14px 24px;margin-top:40px;
+}
+.gci-sticky-inner{
+  max-width:820px;margin:0 auto;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;
+}
+.gci-sticky-text strong{font-family:var(--gci-font-display);font-size:15.5px;display:block}
+.gci-sticky-text span{font-size:13px;color:var(--gci-ink-soft)}
+.gci-sticky-btn{
+  display:inline-flex;align-items:center;gap:9px;flex-shrink:0;
+  font-family:var(--gci-font-display);font-weight:800;font-size:15.5px;
+  background:var(--gci-grad-cta);color:#fff;padding:13px 24px;border-radius:12px;
+  box-shadow:0 10px 26px -8px var(--gci-cta-glow);transition:.2s;cursor:pointer;border:none;
+}
+.gci-sticky-btn:hover{transform:translateY(-2px)}
+.gci-sticky-btn svg{width:18px;height:18px;stroke:#fff}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .gci-cat-grid,.gci-review-grid{grid-template-columns:repeat(2,1fr)}
+  .gci-start-grid{grid-template-columns:repeat(2,1fr)}
+  .gci-nav a{padding:8px 10px;font-size:13.5px}
+  .gci-search input{width:90px}
+}
+@media(max-width:768px){
+  body{font-size:16px}
+  .gci-header-inner{height:60px;gap:14px;position:relative}
+  .gci-logo svg{height:38px}
+  /* burger visible; desktop search hidden; nav becomes a dropdown panel */
+  .gci-burger{display:flex}
+  .gci-header > .gci-header-inner > .gci-search{display:none}
+  .gci-nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:4px;margin-left:0;
+    background:var(--gci-navy-800);
+    border-top:1px solid rgba(255,255,255,.08);
+    box-shadow:0 18px 40px -12px rgba(0,0,0,.55);
+    padding:12px 16px 16px;z-index:50;
+  }
+  #gci-menu-toggle:checked ~ .gci-nav{display:flex}
+  .gci-nav a{font-size:15.5px;padding:11px 12px;width:100%}
+  .gci-nav a::after{display:none}
+  .gci-search-mobile{display:flex;margin-top:8px;width:100%}
+  .gci-search-mobile input{width:100%;flex:1}
+  .gci-stats-grid{grid-template-columns:repeat(2,1fr);gap:24px 14px}
+  .gci-stat::after{display:none!important}
+  .gci-best-row{grid-template-columns:1fr}
+  .gci-method-grid{grid-template-columns:1fr}
+  .gci-related-grid{grid-template-columns:1fr}
+  .gci-footer-grid{grid-template-columns:1fr;gap:32px}
+  .gci-news{padding:36px 26px}
+  .gci-method{padding:28px 22px}
+}
+@media(max-width:480px){
+  .gci-wrap{padding:0 16px}
+  .gci-cat-grid,.gci-review-grid,.gci-start-grid{grid-template-columns:1fr}
+  .gci-proscons{grid-template-columns:1fr}
+  .gci-hero{padding:54px 0 64px}
+  .gci-section{padding:48px 0}
+  .gci-btn{width:100%;justify-content:center}
+  .gci-hero-btns{flex-direction:column}
+  .gci-article{padding:32px 16px 60px}
+  .gci-sticky-inner{flex-direction:column;gap:10px;align-items:stretch}
+  .gci-sticky-btn{justify-content:center}
+  .gci-preview-badge{top:10px;right:10px;font-size:11px;padding:7px 11px}
+  .gci-stat-num{font-size:28px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<div class="gci-preview-badge">PREVIEW — Novo design (mockup)</div>
+
+<!-- ===================================================== -->
+<!-- ============== TELA A: HOME ========================== -->
+<!-- ===================================================== -->
+
+<!-- HEADER -->
+<header class="gci-header">
+  <div class="gci-wrap gci-header-inner">
+    <a href="#" class="gci-logo" aria-label="Guia Casa Inteligente — início">
+      <svg xmlns="http://www.w3.org/2000/svg" width="320" height="64" viewBox="0 0 320 64" role="img" aria-label="Guia Casa Inteligente"><defs><linearGradient id="gciBrand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs><g fill="none" stroke="url(#gciBrand)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 30 32 15 50 30"/><path d="M19 28v18a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V28"/></g><g fill="none" stroke="url(#gciBrand)" stroke-width="2.6" stroke-linecap="round"><path d="M27 40a7 7 0 0 1 10 0"/><path d="M23.5 36a12 12 0 0 1 17 0"/></g><circle cx="32" cy="43.5" r="2.4" fill="#06B6D4"/><text x="66" y="29" font-family="Sora,Inter,sans-serif" font-size="20" font-weight="800" letter-spacing="-0.6" fill="#F4F7FB">Guia Casa</text><text x="66" y="50" font-family="Sora,Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.4" fill="#06B6D4">Inteligente</text></svg>
+    </a>
+    <input type="checkbox" id="gci-menu-toggle" class="gci-menu-checkbox">
+    <label for="gci-menu-toggle" class="gci-burger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </label>
+    <nav class="gci-nav" aria-label="Navegação principal">
+      <a href="#">Iluminação</a>
+      <a href="#">Segurança</a>
+      <a href="#">Robôs</a>
+      <a href="#">Assistentes</a>
+      <a href="#">Comparativos</a>
+      <a href="#">Ofertas</a>
+      <form class="gci-search gci-search-mobile" role="search" onsubmit="return false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" placeholder="Buscar review..." aria-label="Buscar">
+      </form>
+    </nav>
+    <form class="gci-search" role="search" onsubmit="return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" placeholder="Buscar review..." aria-label="Buscar">
+    </form>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="gci-hero">
+  <div class="gci-wrap gci-hero-inner">
+    <span class="gci-eyebrow">⭐ Reviews honestos de casa inteligente</span>
+    <h1>Pare de adivinhar. Escolha a casa inteligente <span class="hl">certa de primeira.</span></h1>
+    <p class="gci-hero-sub">Comparamos lâmpadas, câmeras, robôs aspiradores e assistentes de voz com critérios claros e veredito sem rodeio. Você lê em minutos, decide com segurança e compra pelo melhor caminho — sem cair em review pago disfarçado.</p>
+    <div class="gci-hero-btns">
+      <a href="#start" class="gci-btn gci-btn-cta">Ver os mais recomendados →</a>
+      <a href="#method" class="gci-btn gci-btn-ghost">Como avaliamos os produtos</a>
+    </div>
+    <div class="gci-hero-trust">
+      <span>⭐ Veredito claro em todo guia</span>
+      <span>🔍 Critérios técnicos abertos</span>
+      <span>🤝 Transparência total sobre afiliados</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="gci-wrap">
+  <div class="gci-stats">
+    <p class="gci-stats-title">Análises com método, não com opinião solta.</p>
+    <div class="gci-stats-grid">
+      <div class="gci-stat">
+        <div class="gci-stat-num">6</div>
+        <div class="gci-stat-label">categorias cobertas</div>
+      </div>
+      <div class="gci-stat">
+        <div class="gci-stat-num">5</div>
+        <div class="gci-stat-label">critérios em cada review</div>
+      </div>
+      <div class="gci-stat">
+        <div class="gci-stat-num">100%</div>
+        <div class="gci-stat-label">dos links de afiliado declarados</div>
+      </div>
+      <div class="gci-stat">
+        <div class="gci-stat-num small">2,4 GHz · Zigbee · Wi-Fi</div>
+        <div class="gci-stat-label">a parte técnica que a gente explica em português</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMECE POR AQUI -->
+<section class="gci-section" id="start">
+  <div class="gci-wrap">
+    <div class="gci-section-head">
+      <span class="gci-kicker">Comece por aqui</span>
+      <h2>Não sabe por onde começar?</h2>
+      <p>Escolha pela sua intenção — leva menos de 1 minuto pra achar o que importa.</p>
+    </div>
+    <div class="gci-start-grid">
+      <a class="gci-start-card" href="#">
+        <span class="gci-start-emoji">🏆</span>
+        <h3>Os mais recomendados agora</h3>
+        <p>A escolha geral de cada categoria, com o porquê. Se você quer acertar e seguir a vida, comece aqui.</p>
+        <span class="gci-start-arrow">Ver lista →</span>
+      </a>
+      <a class="gci-start-card" href="#">
+        <span class="gci-start-emoji">💸</span>
+        <h3>Melhores até R$ 200</h3>
+        <p>Tudo que entrega de verdade sem doer no bolso. Custo-benefício real, sem pegadinha.</p>
+        <span class="gci-start-arrow">Ver baratos →</span>
+      </a>
+      <a class="gci-start-card" href="#">
+        <span class="gci-start-emoji">🔌</span>
+        <h3>Primeira casa inteligente</h3>
+        <p>O passo a passo pra montar sua primeira automação sem comprar coisa que não conversa entre si.</p>
+        <span class="gci-start-arrow">Começar →</span>
+      </a>
+      <a class="gci-start-card" href="#">
+        <span class="gci-start-emoji">📊</span>
+        <h3>Comparativos lado a lado</h3>
+        <p>X vs Y, tabela na cara, vencedor apontado. Salve e volte na hora de decidir.</p>
+        <span class="gci-start-arrow">Comparar →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section class="gci-section" style="padding-top:8px">
+  <div class="gci-wrap">
+    <div class="gci-section-head">
+      <span class="gci-kicker">Guias por categoria</span>
+      <h2>Melhores guias por categoria</h2>
+      <p>Seis frentes da casa inteligente. Em cada uma, o que comprar, o que evitar e por quê.</p>
+    </div>
+    <div class="gci-cat-grid">
+      <article class="gci-card">
+        <div class="gci-thumb t1"><div class="gci-thumb-label"><span class="ico">💡</span><span class="txt">Iluminação Inteligente</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Iluminação</span>
+          <h3>Iluminação Inteligente</h3>
+          <p>Lâmpadas e fitas de LED que acendem com voz e app — e quais dão dor de cabeça pra conectar. Wi-Fi vs Zigbee antes de gastar.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t2"><div class="gci-thumb-label"><span class="ico">🛡️</span><span class="txt">Segurança e Câmeras</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Segurança</span>
+          <h3>Segurança e Câmeras</h3>
+          <p>Câmeras, fechaduras e sensores que realmente protegem. Resolução, visão noturna e o custo escondido da nuvem.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t3"><div class="gci-thumb-label"><span class="ico">🤖</span><span class="txt">Robôs e Limpeza</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Robôs</span>
+          <h3>Robôs e Limpeza</h3>
+          <p>Robôs aspiradores que limpam de verdade vs. os que só passeiam. Sucção, mapeamento e autonomia sem marketing.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t4"><div class="gci-thumb-label"><span class="ico">🎙️</span><span class="txt">Assistentes e Controle</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Assistentes</span>
+          <h3>Assistentes e Controle</h3>
+          <p>Alexa, Google e centrais que mandam na casa toda. Qual entende melhor o português e conversa com mais aparelhos.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t5"><div class="gci-thumb-label"><span class="ico">📚</span><span class="txt">Guias e Comparativos</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Comparativos</span>
+          <h3>Guias e Comparativos</h3>
+          <p>O conteúdo que você salva: "qual escolher", "X vs Y" e "melhores até R$ N", com tabela no topo e veredito no fim.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t6"><div class="gci-thumb-label"><span class="ico">🔥</span><span class="txt">Ofertas e Novidades</span></div></div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Ofertas</span>
+          <h3>Ofertas e Novidades</h3>
+          <p>Promoção que vale a pena (com preço de verdade) e os lançamentos que merecem sua atenção — sem inventar urgência.</p>
+          <div class="gci-card-foot"><span class="gci-card-link">Ver guias →</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MAIS LIDOS -->
+<section class="gci-section" style="padding-top:8px">
+  <div class="gci-wrap">
+    <div class="gci-section-head">
+      <span class="gci-kicker">🔥 Em alta</span>
+      <h2>Mais lidos da semana</h2>
+      <p>Atualizamos a lista conforme o que sobe de verdade — sem empurrar o que ninguém leu.</p>
+    </div>
+    <div class="gci-review-grid">
+      <article class="gci-card">
+        <div class="gci-thumb t2">
+          <span class="gci-updated">📅 Atualizado em 28/06</span>
+          <div class="gci-thumb-label"><span class="ico">🎙️</span><span class="txt">Alexa vs Google Nest</span></div>
+        </div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Comparativo</span>
+          <h3>Alexa vs Google Nest: qual escolher em 2026</h3>
+          <p>Tabela lado a lado, vencedor por uso. Qual entende melhor o português e controla mais aparelhos.</p>
+          <div class="gci-card-foot">
+            <span class="gci-stars"><span class="s">★★★★★</span> 4,8</span>
+            <span class="gci-readtime">⏱ 8 min</span>
+          </div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t6">
+          <span class="gci-updated">📅 Atualizado em 26/06</span>
+          <div class="gci-thumb-label"><span class="ico">📷</span><span class="txt">Câmeras Wi-Fi até R$300</span></div>
+        </div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Segurança</span>
+          <h3>Melhores câmeras Wi-Fi até R$ 300</h3>
+          <p>5 modelos comparados por resolução, visão noturna e custo de nuvem. A melhor escolha apontada.</p>
+          <div class="gci-card-foot">
+            <span class="gci-stars"><span class="s">★★★★☆</span> 4,5</span>
+            <span class="gci-readtime">⏱ 10 min</span>
+          </div>
+        </div>
+      </article>
+      <article class="gci-card">
+        <div class="gci-thumb t3">
+          <span class="gci-updated">📅 Atualizado em 24/06</span>
+          <div class="gci-thumb-label"><span class="ico">🤖</span><span class="txt">Robôs aspiradores</span></div>
+        </div>
+        <div class="gci-card-body">
+          <span class="gci-pill">Robôs</span>
+          <h3>Robô aspirador custa a pena? Os 4 que valem</h3>
+          <p>Sucção, mapeamento e autonomia testados a fundo. Quem limpa de verdade e quem só passeia.</p>
+          <div class="gci-card-foot">
+            <span class="gci-stars"><span class="s">★★★★★</span> 4,7</span>
+            <span class="gci-readtime">⏱ 12 min</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMO AVALIAMOS -->
+<section class="gci-section" id="method" style="padding-top:8px">
+  <div class="gci-wrap">
+    <div class="gci-method">
+      <div class="gci-section-head" style="margin-bottom:20px">
+        <span class="gci-kicker">Credibilidade</span>
+        <h2>Como escolhemos os produtos</h2>
+        <p>Sem review pago disfarçado. Todo guia passa pelos mesmos critérios, e a gente mostra quais são.</p>
+      </div>
+      <div class="gci-method-grid">
+        <div class="gci-method-item">
+          <div class="gci-method-ico">🔬</div>
+          <div>
+            <h4>Critérios técnicos antes do hype</h4>
+            <p>Olhamos conexão (Wi-Fi 2,4 GHz, Zigbee), bateria, certificação e compatibilidade — não só a foto bonita da caixa.</p>
+          </div>
+        </div>
+        <div class="gci-method-item">
+          <div class="gci-method-ico">⚖️</div>
+          <div>
+            <h4>Comparação real, lado a lado</h4>
+            <p>Cada produto é avaliado contra os concorrentes diretos, nos mesmos critérios, pra você ver onde ele ganha e onde perde.</p>
+          </div>
+        </div>
+        <div class="gci-method-item">
+          <div class="gci-method-ico">🎯</div>
+          <div>
+            <h4>Veredito claro, sempre</h4>
+            <p>A gente termina dizendo qual é a melhor escolha, o melhor custo-benefício e pra quem <strong>não</strong> vale. Nada de "depende".</p>
+          </div>
+        </div>
+        <div class="gci-method-item">
+          <div class="gci-method-ico">🔁</div>
+          <div>
+            <h4>Atualização com data à vista</h4>
+            <p>Preço some, modelo sai de linha, lançamento chega — revisamos e marcamos com "Atualizado em". Se mudou, você fica sabendo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="gci-method-cta">
+        <a href="#" class="gci-link-strong">Veja o método completo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="gci-section" style="padding-top:8px">
+  <div class="gci-wrap">
+    <div class="gci-news">
+      <div class="gci-news-inner">
+        <h2>📬 Receba só o que vale a pena comprar</h2>
+        <p>Uma vez por semana: as melhores ofertas de casa inteligente (com preço de verdade) e os reviews novos, direto no seu e-mail. Sem spam, sem encheção. Cancela quando quiser, em 1 clique.</p>
+        <form class="gci-news-form" onsubmit="return false">
+          <input type="email" placeholder="Seu melhor e-mail" aria-label="Seu e-mail" required>
+          <button type="submit">Quero as ofertas da semana</button>
+        </form>
+        <p class="gci-news-micro">Nada de spam. Você confirma o e-mail e some quando quiser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="gci-footer">
+  <div class="gci-wrap">
+    <div class="gci-footer-grid">
+      <div>
+        <span class="gci-logo" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="320" height="64" viewBox="0 0 320 64" role="img" aria-label="Guia Casa Inteligente"><defs><linearGradient id="gciBrand2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs><g fill="none" stroke="url(#gciBrand2)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 30 32 15 50 30"/><path d="M19 28v18a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V28"/></g><g fill="none" stroke="url(#gciBrand2)" stroke-width="2.6" stroke-linecap="round"><path d="M27 40a7 7 0 0 1 10 0"/><path d="M23.5 36a12 12 0 0 1 17 0"/></g><circle cx="32" cy="43.5" r="2.4" fill="#06B6D4"/><text x="66" y="29" font-family="Sora,Inter,sans-serif" font-size="20" font-weight="800" letter-spacing="-0.6" fill="#F4F7FB">Guia Casa</text><text x="66" y="50" font-family="Sora,Inter,sans-serif" font-size="18" font-weight="600" letter-spacing="-0.4" fill="#06B6D4">Inteligente</text></svg>
+        </span>
+        <p class="gci-footer-about"><strong style="color:#dce7f3">Guia Casa Inteligente</strong> — análises honestas pra você escolher o produto certo sem perder dinheiro. Reviews e comparativos de iluminação, segurança, robôs e assistentes, com veredito claro e critérios abertos.</p>
+      </div>
+      <div class="gci-footer-nav">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#">Categorias</a></li>
+          <li><a href="#">Mais recomendados</a></li>
+          <li><a href="#">Comparativos</a></li>
+          <li><a href="#">Como avaliamos</a></li>
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="gci-disclosure">Este site tem links de afiliado do Mercado Livre. Se você comprar pelos nossos links, podemos ganhar uma pequena comissão <strong>sem nenhum custo extra para você</strong> — é assim que mantemos o site no ar e independente. Recomendamos pelos critérios, não pela comissão.</p>
+    <p class="gci-copyright">© 2026 Guia Casa Inteligente · Feito no Brasil 🇧🇷 · Os preços e a disponibilidade mudam — confira sempre na página do produto.</p>
+  </div>
+</footer>
+
+<!-- ===================================================== -->
+<!-- ============== DIVISOR =============================== -->
+<!-- ===================================================== -->
+<div class="gci-divider">
+  <div class="gci-divider-inner">
+    <span class="tag">Tela B — Exemplo de artigo</span>
+    <h2>Assim fica um review redesenhado</h2>
+    <p>Componentes editoriais que vendem: tabela, veredito, pros/contras e CTA do Mercado Livre.</p>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<!-- ============== TELA B: ARTIGO ======================== -->
+<!-- ===================================================== -->
+<article class="gci-article">
+  <nav class="gci-breadcrumb" aria-label="Trilha de navegação">
+    <a href="#">Início</a><span class="sep">›</span>
+    <a href="#">Comparativos</a><span class="sep">›</span>
+    <a href="#">Câmeras</a><span class="sep">›</span>
+    <span>Melhores câmeras Wi-Fi até R$ 300</span>
+  </nav>
+
+  <span class="gci-article-pill">Comparativo · Segurança</span>
+  <h1>Melhores câmeras Wi-Fi até R$ 300: 5 modelos comparados (e o que evitar)</h1>
+
+  <div class="gci-article-meta">
+    <span class="by">Por Alexandre Hebeler</span>
+    <span class="dot"></span>
+    <span>Equipe Guia Casa Inteligente</span>
+    <span class="dot"></span>
+    <span>⏱ 10 min de leitura</span>
+    <span class="gci-meta-updated">📅 Atualizado em 28/06/2026</span>
+  </div>
+
+  <p class="gci-affiliate-note">Este artigo tem links de afiliado do Mercado Livre. Se você comprar por eles, podemos ganhar uma pequena comissão <strong>sem custo extra pra você</strong>. Recomendamos pelos critérios técnicos, não pela comissão.</p>
+
+  <p>Câmera Wi-Fi barata que presta existe — o problema é separar a que protege de verdade da que só enche o anúncio de estrelas. Comparamos 5 modelos populares até R$ 300 nos mesmos critérios: resolução, visão noturna, app, armazenamento e estabilidade da conexão. No fim, dizemos qual comprar pra cada situação.</p>
+
+  <!-- TL;DR -->
+  <div class="gci-tldr">
+    <div class="gci-tldr-tag">⚡ Resposta rápida (TL;DR)</div>
+    <ul>
+      <li><strong>Melhor escolha geral:</strong> câmera com 2K, visão noturna colorida e gravação em cartão SD sem mensalidade.</li>
+      <li><strong>Melhor custo-benefício:</strong> modelo 1080p estável que cobre o essencial por menos de R$ 180.</li>
+      <li><strong>Evite se</strong> seu Wi-Fi é só 5 GHz no cômodo — quase toda câmera dessa faixa usa 2,4 GHz.</li>
+    </ul>
+  </div>
+
+  <h2>Comparativo lado a lado</h2>
+  <p>A tabela resume o que importa antes de você decidir. Salve esta página — atualizamos quando os modelos mudam.</p>
+
+  <div class="gci-table-wrap">
+    <table class="gci-table">
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>Modelo A <span class="win">Melhor</span></th>
+          <th>Modelo B</th>
+          <th>Modelo C</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Resolução</td><td>2K (3 MP)</td><td>1080p</td><td>1080p</td></tr>
+        <tr><td>Visão noturna</td><td>Colorida</td><td>Infravermelho</td><td>Infravermelho</td></tr>
+        <tr><td>Wi-Fi</td><td>2,4 GHz</td><td>2,4 GHz</td><td>2,4 GHz</td></tr>
+        <tr><td>Cartão SD (sem nuvem)</td><td class="gci-cell-check">✓ até 256 GB</td><td class="gci-cell-check">✓ até 128 GB</td><td class="gci-cell-x">✕ só nuvem</td></tr>
+        <tr><td>Detecção de pessoas</td><td class="gci-cell-check">✓</td><td class="gci-cell-x">✕</td><td class="gci-cell-check">✓</td></tr>
+        <tr><td>Áudio bidirecional</td><td class="gci-cell-check">✓</td><td class="gci-cell-check">✓</td><td class="gci-cell-check">✓</td></tr>
+        <tr><td>Faixa de preço</td><td>~R$ 280</td><td>~R$ 170</td><td>~R$ 220</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Vereditos por perfil</h2>
+  <div class="gci-best-row">
+    <div class="gci-best win">
+      <div class="gci-best-tag">🏆 Melhor escolha</div>
+      <h4>Modelo A (2K)</h4>
+      <p>Imagem nítida, visão noturna colorida e grava em cartão SD sem mensalidade. Quem quer acertar de primeira, compra essa.</p>
+    </div>
+    <div class="gci-best value">
+      <div class="gci-best-tag">💸 Melhor custo-benefício</div>
+      <h4>Modelo B (1080p)</h4>
+      <p>Cobre o essencial com conexão estável por menos de R$ 180. Ideal pra primeira câmera ou pra cômodos secundários.</p>
+    </div>
+    <div class="gci-best avoid">
+      <div class="gci-best-tag">⚠️ Evite se...</div>
+      <h4>Depende de nuvem</h4>
+      <p>O Modelo C só grava na nuvem paga. Se você não quer mensalidade, fuja — o custo escondido pesa mais que o aparelho.</p>
+    </div>
+  </div>
+
+  <h2>Prós e contras da melhor escolha</h2>
+  <div class="gci-proscons">
+    <div class="gci-pc pros">
+      <h4>👍 Prós</h4>
+      <ul>
+        <li>Resolução 2K entrega detalhe real em rostos e placas</li>
+        <li>Visão noturna colorida, não só preto e branco</li>
+        <li>Grava em cartão SD — zero mensalidade de nuvem</li>
+        <li>Detecção de pessoas reduz alarme falso</li>
+        <li>App em português e instalação simples</li>
+      </ul>
+    </div>
+    <div class="gci-pc cons">
+      <h4>👎 Contras</h4>
+      <ul>
+        <li>Só funciona em Wi-Fi 2,4 GHz (padrão da faixa)</li>
+        <li>Cartão SD vendido à parte</li>
+        <li>Recursos avançados exigem conta no app</li>
+        <li>Sem bateria — precisa de tomada por perto</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Nota por critério</h2>
+  <div class="gci-scores">
+    <div class="gci-score-row">
+      <div class="gci-score-head"><span class="crit">Qualidade de imagem</span><span class="val">9,2</span></div>
+      <div class="gci-bar"><span style="width:92%"></span></div>
+    </div>
+    <div class="gci-score-row">
+      <div class="gci-score-head"><span class="crit">Visão noturna</span><span class="val">9,0</span></div>
+      <div class="gci-bar"><span style="width:90%"></span></div>
+    </div>
+    <div class="gci-score-row">
+      <div class="gci-score-head"><span class="crit">App e usabilidade</span><span class="val">8,5</span></div>
+      <div class="gci-bar"><span style="width:85%"></span></div>
+    </div>
+    <div class="gci-score-row">
+      <div class="gci-score-head"><span class="crit">Estabilidade da conexão</span><span class="val">8,8</span></div>
+      <div class="gci-bar"><span style="width:88%"></span></div>
+    </div>
+    <div class="gci-score-row">
+      <div class="gci-score-head"><span class="crit">Custo-benefício</span><span class="val">9,4</span></div>
+      <div class="gci-bar green"><span style="width:94%"></span></div>
+    </div>
+  </div>
+
+  <!-- MAIN CTA -->
+  <div class="gci-cta-box">
+    <h3>Pronto pra garantir a melhor escolha?</h3>
+    <p class="sub">Confira preço e disponibilidade atualizados no Mercado Livre.</p>
+    <a href="#" class="gci-cta-ml" rel="sponsored nofollow">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      Ver preço no Mercado Livre
+    </a>
+    <div class="gci-cta-trust">
+      <span>🔒 Compra protegida no Mercado Livre</span>
+      <span>🤝 Sem custo extra pra você</span>
+      <span>📦 Preço e estoque atualizados na página</span>
+    </div>
+  </div>
+
+  <h2>Perguntas frequentes</h2>
+  <div class="gci-faq">
+    <details open>
+      <summary>Câmera Wi-Fi de 2,4 GHz funciona no meu roteador?</summary>
+      <div class="gci-faq-body">Sim, desde que seu roteador transmita a faixa de 2,4 GHz (quase todos transmitem). Se o seu Wi-Fi é "dual band", basta conectar a câmera à rede 2,4 GHz na hora da instalação. Câmeras dessa faixa de preço raramente usam 5 GHz.</div>
+    </details>
+    <details>
+      <summary>Preciso pagar mensalidade de nuvem?</summary>
+      <div class="gci-faq-body">Não necessariamente. Os modelos com slot de cartão SD (como o Modelo A e o B) gravam localmente sem custo recorrente. A nuvem é opcional e útil se você quer backup fora de casa — mas confira o preço antes, porque o custo escondido pesa.</div>
+    </details>
+    <details>
+      <summary>A visão noturna colorida vale a diferença de preço?</summary>
+      <div class="gci-faq-body">Se a câmera fica em local com alguma luz ambiente (poste, luminária), a visão colorida ajuda a identificar roupas e rostos. Em escuridão total, o infravermelho preto e branco resolve. Pra área externa movimentada, vale o upgrade.</div>
+    </details>
+    <details>
+      <summary>Dá pra ver a câmera pelo celular fora de casa?</summary>
+      <div class="gci-faq-body">Sim. Todos os modelos têm app com acesso remoto e áudio bidirecional, então você fala e ouve pelo celular de qualquer lugar com internet. A qualidade do streaming depende da sua conexão de upload em casa.</div>
+    </details>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="gci-verdict">
+    <div class="gci-verdict-tag">🎯 Veredito final</div>
+    <h3>O que comprar, sem rodeio</h3>
+    <p>Pra maioria das pessoas, o <strong>Modelo A (2K)</strong> é o melhor negócio até R$ 300: imagem nítida, visão noturna colorida e gravação local sem mensalidade. Se o orçamento aperta, o <strong>Modelo B</strong> cobre o essencial com folga. Só evite o que depende de nuvem paga se você não quer custo mensal. Os preços mudam — confira na página do produto antes de fechar.</p>
+  </div>
+
+  <!-- LEIA TAMBEM -->
+  <div class="gci-related">
+    <h3>Leia também</h3>
+    <div class="gci-related-grid">
+      <a class="gci-related-card" href="#">
+        <span class="rc-pill">Comparativo</span>
+        <h4>Alexa vs Google Nest: qual escolher em 2026</h4>
+      </a>
+      <a class="gci-related-card" href="#">
+        <span class="rc-pill">Segurança</span>
+        <h4>Fechadura inteligente vale a pena? O que olhar antes</h4>
+      </a>
+      <a class="gci-related-card" href="#">
+        <span class="rc-pill">Guia</span>
+        <h4>Primeira casa inteligente: por onde começar</h4>
+      </a>
+    </div>
+  </div>
+</article>
+
+<!-- STICKY FOOTER CTA -->
+<div class="gci-sticky-cta">
+  <div class="gci-sticky-inner">
+    <div class="gci-sticky-text">
+      <strong>Melhor escolha: Modelo A (2K)</strong>
+      <span>Visão noturna colorida · grava sem mensalidade</span>
+    </div>
+    <a href="#" class="gci-sticky-btn" rel="sponsored nofollow">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      Ver preço no Mercado Livre
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

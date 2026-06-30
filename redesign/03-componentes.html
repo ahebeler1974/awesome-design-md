@@ -1,0 +1,662 @@
+<!doctype html>
+<!--
+  ============================================================================
+  GUIA CASA INTELIGENTE (ahebeler.shop) — BIBLIOTECA DE COMPONENTES HTML
+  ============================================================================
+  COMO USAR:
+  - No WordPress (Gutenberg), adicione um bloco "HTML personalizado" e cole
+    APENAS o trecho do componente desejado (do <!-- COMPONENTE --> ate o fim
+    do bloco). Nao precisa colar este arquivo inteiro.
+  - As classes .gci-* ja estao estilizadas pelo CSS premium do tema. Este
+    arquivo traz um CSS de FALLBACK (no <style> abaixo) para o caso de voce
+    pre-visualizar fora do WordPress; pode remover o <style> ao colar no site.
+  - Funciona SEM JavaScript. O FAQ usa <details>/<summary> nativos.
+  - Onde houver href="#" marcado com <!-- TROQUE href -->, substitua pelo
+    seu link de afiliado do Mercado Livre (etiqueta matt_word=alexandrehebeler,
+    matt_tool=38524122).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia Casa Inteligente — Biblioteca de Componentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  CSS DE FALLBACK / PREVIEW
+  Inclua este <style> UMA vez no site (ex.: Aparencia > Personalizar > CSS
+  Adicional) OU deixe o tema premium cuidar dos .gci-*. Aqui ele garante que
+  os componentes ja fiquem bonitos no preview e como base segura.
+-->
+<style>
+:root{
+  --gci-ink:#0B1220;
+  --gci-ink-soft:#475569;
+  --gci-navy-900:#091A2E;
+  --gci-navy-800:#0C2236;
+  --gci-blue:#2563EB;
+  --gci-blue-600:#1D4ED8;
+  --gci-cyan:#06B6D4;
+  --gci-teal:#0EA5A4;
+  --gci-cta:#15A24A;
+  --gci-cta-600:#0F7E39;
+  --gci-cta-glow:rgba(21,162,74,.35);
+  --gci-amber:#F59E0B;
+  --gci-bg:#F4F7FB;
+  --gci-surface:#FFFFFF;
+  --gci-border:#E4EAF2;
+  --gci-shadow:0 10px 30px -12px rgba(9,26,46,.18);
+  --gci-shadow-hover:0 20px 45px -15px rgba(9,26,46,.28);
+  --gci-radius:16px;
+  --gci-radius-sm:10px;
+  --gci-grad-hero:linear-gradient(135deg,#091A2E 0%,#0C2236 45%,#0E3A5C 100%);
+  --gci-grad-brand:linear-gradient(90deg,#2563EB 0%,#06B6D4 100%);
+  --gci-grad-cta:linear-gradient(90deg,#15A24A 0%,#22C55E 100%);
+  --gci-font-display:"Sora","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --gci-font-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+/* Preview shell — nao precisa no WordPress */
+body{margin:0;background:var(--gci-bg);color:var(--gci-ink);font-family:var(--gci-font-sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.gci-preview-wrap{max-width:880px;margin:0 auto;padding:32px 20px 120px;}
+.gci-preview-label{font:600 12px/1 var(--gci-font-sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gci-blue);margin:48px 0 12px;}
+
+/* Base tipografica dos componentes */
+.gci-hero,.gci-disclosure,.gci-tldr,.gci-cta-wrap,.gci-best,.gci-pros,.gci-cons,
+.gci-rating,.gci-tabela,.gci-faq,.gci-breadcrumb,.gci-relacionados,.gci-sticky-cta{
+  font-family:var(--gci-font-sans);box-sizing:border-box;
+}
+.gci-hero *,.gci-tldr *,.gci-best *,.gci-faq *,.gci-relacionados *{box-sizing:border-box;}
+.gci-h{font-family:var(--gci-font-display);letter-spacing:-0.02em;}
+
+/* ---------- 1. HERO ---------- */
+.gci-hero{
+  position:relative;overflow:hidden;border-radius:var(--gci-radius);
+  background:var(--gci-grad-hero);color:#fff;padding:56px 40px;
+  box-shadow:var(--gci-shadow);
+}
+.gci-hero::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 80% at 85% 10%,rgba(6,182,212,.28),transparent 60%),
+  radial-gradient(50% 60% at 10% 100%,rgba(37,99,235,.25),transparent 60%);
+  pointer-events:none;}
+.gci-hero__inner{position:relative;z-index:1;max-width:680px;}
+.gci-hero__eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 var(--gci-font-sans);
+  letter-spacing:.14em;text-transform:uppercase;color:#7DD3FC;
+  background:rgba(255,255,255,.06);border:1px solid rgba(125,211,252,.25);
+  padding:8px 14px;border-radius:999px;margin-bottom:20px;}
+.gci-hero__title{font-family:var(--gci-font-display);font-weight:800;letter-spacing:-0.03em;
+  font-size:clamp(28px,5vw,46px);line-height:1.08;margin:0 0 16px;}
+.gci-hero__title span{background:var(--gci-grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.gci-hero__sub{font-size:clamp(16px,2.4vw,19px);line-height:1.6;color:#CBD5E1;margin:0 0 28px;max-width:560px;}
+.gci-hero__actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.gci-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--gci-font-display);
+  font-weight:700;font-size:16px;text-decoration:none;padding:15px 26px;border-radius:var(--gci-radius-sm);
+  transition:transform .18s ease,box-shadow .18s ease;cursor:pointer;border:0;}
+.gci-btn--primary{background:var(--gci-grad-cta);color:#fff;box-shadow:0 12px 28px -10px var(--gci-cta-glow);}
+.gci-btn--primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -10px var(--gci-cta-glow);}
+.gci-btn--ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.gci-btn--ghost:hover{background:rgba(255,255,255,.16);transform:translateY(-2px);}
+.gci-hero__badge{display:inline-flex;align-items:center;gap:8px;margin-top:24px;
+  font-size:13px;color:#94A3B8;}
+.gci-hero__badge svg{flex:none;}
+.gci-dot{width:7px;height:7px;border-radius:50%;background:var(--gci-cta);box-shadow:0 0 0 4px var(--gci-cta-glow);}
+
+/* ---------- 2. DISCLOSURE ---------- */
+.gci-disclosure{display:flex;gap:10px;align-items:flex-start;
+  background:#F1F6FE;border:1px solid var(--gci-border);border-left:4px solid var(--gci-blue);
+  border-radius:var(--gci-radius-sm);padding:12px 16px;font-size:13.5px;line-height:1.55;
+  color:var(--gci-ink-soft);margin:18px 0;}
+.gci-disclosure svg{flex:none;margin-top:1px;color:var(--gci-blue);}
+.gci-disclosure strong{color:var(--gci-ink);}
+
+/* ---------- 3. TL;DR ---------- */
+.gci-tldr{background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);
+  padding:24px 26px;margin:28px 0;position:relative;overflow:hidden;}
+.gci-tldr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gci-grad-brand);}
+.gci-tldr__tag{display:inline-flex;align-items:center;gap:8px;font:700 12px/1 var(--gci-font-display);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gci-blue);margin-bottom:12px;}
+.gci-tldr__verdict{font-family:var(--gci-font-display);font-weight:700;font-size:19px;line-height:1.4;
+  letter-spacing:-0.01em;margin:0 0 14px;color:var(--gci-ink);}
+.gci-tldr__verdict b{color:var(--gci-cta-600);}
+.gci-tldr p{margin:0 0 16px;color:var(--gci-ink-soft);font-size:15.5px;}
+.gci-tldr .gci-cta{margin:0;}
+
+/* ---------- 4. CTA MERCADO LIVRE ---------- */
+.gci-cta-wrap{margin:22px 0;}
+.gci-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  font-family:var(--gci-font-display);font-weight:700;font-size:17px;text-decoration:none;
+  background:var(--gci-grad-cta);color:#fff;padding:17px 32px;border-radius:var(--gci-radius-sm);
+  box-shadow:0 14px 30px -12px var(--gci-cta-glow);transition:transform .18s ease,box-shadow .18s ease;}
+.gci-cta:hover{transform:translateY(-2px);box-shadow:0 20px 40px -12px var(--gci-cta-glow);}
+.gci-cta svg{flex:none;}
+.gci-cta__micro{display:flex;align-items:center;gap:7px;margin-top:10px;
+  font-size:13px;color:var(--gci-ink-soft);}
+.gci-cta__micro svg{flex:none;color:var(--gci-cta);}
+
+/* ---------- 5. MELHOR ESCOLHA ---------- */
+.gci-best{display:flex;gap:16px;align-items:flex-start;
+  background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);padding:22px 24px;margin:22px 0;
+  border-top:4px solid var(--gci-amber);}
+.gci-best--value{border-top-color:var(--gci-teal);}
+.gci-best--avoid{border-top-color:#EF4444;}
+.gci-best__icon{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#FEF3C7,#FDE68A);color:#B45309;}
+.gci-best--value .gci-best__icon{background:linear-gradient(135deg,#CCFBF1,#99F6E4);color:#0F766E;}
+.gci-best--avoid .gci-best__icon{background:linear-gradient(135deg,#FEE2E2,#FECACA);color:#B91C1C;}
+.gci-best__body{flex:1;min-width:0;}
+.gci-best__label{font:700 12px/1 var(--gci-font-display);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gci-amber);margin-bottom:6px;}
+.gci-best--value .gci-best__label{color:var(--gci-teal);}
+.gci-best--avoid .gci-best__label{color:#EF4444;}
+.gci-best__title{font-family:var(--gci-font-display);font-weight:700;font-size:18px;letter-spacing:-0.01em;margin:0 0 6px;}
+.gci-best__body p{margin:0;color:var(--gci-ink-soft);font-size:15px;}
+
+/* ---------- 6. PROS / CONTRAS ---------- */
+.gci-proscons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+.gci-pros,.gci-cons{background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);padding:20px 22px;box-shadow:var(--gci-shadow);}
+.gci-pros{border-top:4px solid var(--gci-cta);}
+.gci-cons{border-top:4px solid #EF4444;}
+.gci-proscons h3{font-family:var(--gci-font-display);font-weight:700;font-size:16px;
+  display:flex;align-items:center;gap:9px;margin:0 0 14px;}
+.gci-pros h3{color:var(--gci-cta-600);}
+.gci-cons h3{color:#DC2626;}
+.gci-proscons ul{list-style:none;margin:0;padding:0;}
+.gci-proscons li{position:relative;padding-left:28px;margin-bottom:10px;font-size:15px;color:var(--gci-ink-soft);line-height:1.5;}
+.gci-proscons li:last-child{margin-bottom:0;}
+.gci-pros li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;
+  background:var(--gci-cta);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center/13px no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center/13px no-repeat;}
+.gci-cons li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;
+  background:#EF4444;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E") center/12px no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E") center/12px no-repeat;}
+
+/* ---------- 7. NOTA POR CRITERIO ---------- */
+.gci-rating{background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);box-shadow:var(--gci-shadow);padding:24px 26px;margin:24px 0;}
+.gci-rating__head{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--gci-border);}
+.gci-rating__title{font-family:var(--gci-font-display);font-weight:700;font-size:16px;margin:0;}
+.gci-rating__score{display:flex;align-items:baseline;gap:6px;font-family:var(--gci-font-display);}
+.gci-rating__score b{font-size:30px;font-weight:800;color:var(--gci-blue);letter-spacing:-0.02em;}
+.gci-rating__score span{font-size:14px;color:var(--gci-ink-soft);}
+.gci-rating__row{display:grid;grid-template-columns:140px 1fr 38px;align-items:center;gap:12px;margin-bottom:12px;}
+.gci-rating__row:last-child{margin-bottom:0;}
+.gci-rating__label{font-size:14px;color:var(--gci-ink-soft);font-weight:500;}
+.gci-rating__bar{height:9px;border-radius:999px;background:#EEF2F8;overflow:hidden;}
+.gci-rating__fill{height:100%;border-radius:999px;background:var(--gci-grad-brand);}
+.gci-rating__num{font-family:var(--gci-font-display);font-weight:700;font-size:14px;text-align:right;color:var(--gci-ink);}
+
+/* ---------- 8. TABELA COMPARATIVA ---------- */
+.gci-tabela{margin:28px 0;border-radius:var(--gci-radius);overflow:hidden;
+  border:1px solid var(--gci-border);box-shadow:var(--gci-shadow);background:var(--gci-surface);}
+.gci-tabela__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.gci-tabela table{width:100%;border-collapse:collapse;min-width:640px;}
+.gci-tabela thead th{background:var(--gci-grad-hero);color:#fff;text-align:left;
+  font-family:var(--gci-font-display);font-weight:700;font-size:14px;padding:16px 18px;vertical-align:bottom;}
+.gci-tabela thead th:first-child{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#94A3B8;}
+.gci-tabela__pill{display:inline-block;margin-top:6px;font:600 11px/1 var(--gci-font-sans);
+  letter-spacing:.04em;text-transform:uppercase;color:#0C2236;background:#7DD3FC;padding:5px 9px;border-radius:999px;}
+.gci-tabela tbody th{text-align:left;font-family:var(--gci-font-display);font-weight:600;font-size:14px;
+  color:var(--gci-ink);padding:14px 18px;background:#F8FAFD;white-space:nowrap;}
+.gci-tabela tbody td{padding:14px 18px;font-size:14.5px;color:var(--gci-ink-soft);border-top:1px solid var(--gci-border);text-align:center;}
+.gci-tabela tbody th{border-top:1px solid var(--gci-border);}
+.gci-tabela tbody tr:hover td,.gci-tabela tbody tr:hover th{background:#F1F6FE;}
+.gci-tabela__star{color:var(--gci-amber);font-weight:700;font-family:var(--gci-font-display);white-space:nowrap;}
+.gci-tabela__price{font-family:var(--gci-font-display);font-weight:700;color:var(--gci-ink);}
+.gci-tabela .gci-cta{padding:11px 16px;font-size:13px;gap:7px;}
+.gci-tabela__hl td{background:#FFFBEB;}
+.gci-tabela__hl th{background:#FEF8E7;}
+
+/* ---------- 9. FAQ ---------- */
+.gci-faq{margin:28px 0;}
+.gci-faq__title{font-family:var(--gci-font-display);font-weight:700;font-size:22px;letter-spacing:-0.02em;margin:0 0 16px;}
+.gci-faq details{background:var(--gci-surface);border:1px solid var(--gci-border);border-radius:var(--gci-radius-sm);
+  box-shadow:var(--gci-shadow);margin-bottom:12px;overflow:hidden;}
+.gci-faq details[open]{border-color:#BFD7FB;}
+.gci-faq summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;font-family:var(--gci-font-display);font-weight:600;font-size:16.5px;
+  color:var(--gci-ink);}
+.gci-faq summary::-webkit-details-marker{display:none;}
+.gci-faq summary::after{content:"";flex:none;width:20px;height:20px;
+  background:var(--gci-blue);border-radius:50%;transition:transform .2s ease;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z'/%3E%3C/svg%3E") center/16px no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z'/%3E%3C/svg%3E") center/16px no-repeat;}
+.gci-faq details[open] summary::after{transform:rotate(180deg);}
+.gci-faq summary:hover{color:var(--gci-blue);}
+.gci-faq__a{padding:0 22px 20px;color:var(--gci-ink-soft);font-size:15.5px;line-height:1.65;}
+.gci-faq__a p{margin:0;}
+
+/* ---------- 10. BREADCRUMB ---------- */
+.gci-breadcrumb{font-size:13.5px;color:var(--gci-ink-soft);margin:8px 0 18px;display:flex;flex-wrap:wrap;
+  align-items:center;gap:7px;}
+.gci-breadcrumb a{color:var(--gci-blue);text-decoration:none;font-weight:500;}
+.gci-breadcrumb a:hover{text-decoration:underline;}
+.gci-breadcrumb svg{flex:none;color:#94A3B8;}
+.gci-breadcrumb [aria-current]{color:var(--gci-ink);font-weight:600;}
+
+/* ---------- 11. LEIA TAMBEM ---------- */
+.gci-relacionados{margin:36px 0;}
+.gci-relacionados__title{font-family:var(--gci-font-display);font-weight:700;font-size:20px;letter-spacing:-0.02em;margin:0 0 18px;}
+.gci-relacionados__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.gci-card{display:flex;flex-direction:column;background:var(--gci-surface);border:1px solid var(--gci-border);
+  border-radius:var(--gci-radius);overflow:hidden;box-shadow:var(--gci-shadow);text-decoration:none;color:inherit;
+  transition:transform .2s ease,box-shadow .2s ease;}
+.gci-card:hover{transform:translateY(-4px);box-shadow:var(--gci-shadow-hover);}
+.gci-card__thumb{position:relative;aspect-ratio:16/9;background:var(--gci-grad-hero);overflow:hidden;}
+.gci-card__thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.gci-card__pill{position:absolute;top:12px;left:12px;font:600 11px/1 var(--gci-font-sans);
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--gci-grad-brand);
+  padding:6px 11px;border-radius:999px;box-shadow:0 4px 12px -4px rgba(9,26,46,.4);}
+.gci-card__body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1;}
+.gci-card__h{font-family:var(--gci-font-display);font-weight:700;font-size:16px;line-height:1.3;letter-spacing:-0.01em;margin:0;color:var(--gci-ink);}
+.gci-card__meta{margin-top:auto;display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--gci-ink-soft);}
+.gci-card__meta .gci-star{color:var(--gci-amber);font-weight:700;font-family:var(--gci-font-display);}
+.gci-card__meta svg{flex:none;}
+
+/* ---------- 12. STICKY CTA MOBILE ---------- */
+.gci-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:9999;display:none;
+  align-items:center;gap:12px;padding:10px 14px;
+  background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);
+  border-top:1px solid var(--gci-border);box-shadow:0 -8px 24px -12px rgba(9,26,46,.25);}
+.gci-sticky-cta__info{flex:1;min-width:0;line-height:1.2;}
+.gci-sticky-cta__name{font-family:var(--gci-font-display);font-weight:700;font-size:13.5px;color:var(--gci-ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+.gci-sticky-cta__price{font-size:12px;color:var(--gci-ink-soft);}
+.gci-sticky-cta__price b{color:var(--gci-cta-600);}
+.gci-sticky-cta .gci-cta{flex:none;padding:13px 20px;font-size:14px;}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width:640px){
+  .gci-hero{padding:38px 22px;}
+  .gci-proscons{grid-template-columns:1fr;}
+  .gci-relacionados__grid{grid-template-columns:1fr;}
+  .gci-rating__row{grid-template-columns:96px 1fr 34px;gap:9px;}
+  .gci-sticky-cta{display:flex;} /* aparece so no mobile */
+  .gci-best{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+<div class="gci-preview-wrap">
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 1. Hero da Home | Onde usar: topo da pagina inicial (bloco HTML personalizado de largura total) -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">1 · Hero da Home</p>
+
+<section class="gci-hero">
+  <div class="gci-hero__inner">
+    <span class="gci-hero__eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 21v-6h6v6"/></svg>
+      Reviews honestos de casa inteligente
+    </span>
+    <h1 class="gci-hero__title">Pare de <span>comprar errado</span>. Compre a casa inteligente certa pra você.</h1>
+    <p class="gci-hero__sub">Testamos lâmpadas, câmeras, robôs aspiradores e assistentes de verdade — e dizemos sem rodeios o que vale a pena. Comparativos claros, veredito direto e o melhor preço.</p>
+    <div class="gci-hero__actions">
+      <a class="gci-btn gci-btn--primary" href="/melhores-robos-aspiradores/">
+        Ver os melhores de 2026
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="gci-btn gci-btn--ghost" href="/como-avaliamos/">Como avaliamos os produtos</a>
+    </div>
+    <div class="gci-hero__badge">
+      <span class="gci-dot"></span>
+      Mais de 120 produtos testados • Atualizado em junho de 2026
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 2. Disclosure de afiliado | Onde usar: logo acima/abaixo do PRIMEIRO CTA do artigo (nao deixe so no rodape) -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">2 · Disclosure de afiliado</p>
+
+<aside class="gci-disclosure">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  <span><strong>Transparência:</strong> alguns links levam ao Mercado Livre e podemos ganhar uma comissão se você comprar — sem custo extra pra você. Isso nunca muda nossa nota nem nosso veredito.</span>
+</aside>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 3. Caixa TL;DR (Resposta rapida) | Onde usar: logo apos a introducao do artigo, antes do conteudo longo -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">3 · TL;DR / Resposta rápida</p>
+
+<aside class="gci-tldr">
+  <div class="gci-tldr__tag">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+    Resposta rápida
+  </div>
+  <p class="gci-tldr__verdict">Para a maioria das casas, o <b>Robô Aspirador Kabum Smart 700</b> é a melhor compra: mapeamento a laser, esvaziamento automático e ótimo desempenho em pelo de pet por um preço justo.</p>
+  <p>Tem orçamento curto? O Multilaser HOME limpa bem o básico. Casa grande com tapetes altos? Vale subir para o modelo com torre de autolimpeza.</p>
+  <!-- CTA reaproveitado dentro do TL;DR -->
+  <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+    Ver preço no Mercado Livre
+  </a>
+</aside>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 4. Botao CTA Mercado Livre | Onde usar: apos apresentar cada produto recomendado -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">4 · CTA Mercado Livre</p>
+
+<div class="gci-cta-wrap">
+  <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+    Ver preço no Mercado Livre
+  </a>
+  <p class="gci-cta__micro">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+    Preço e disponibilidade atualizados no Mercado Livre • compra com Mercado Pago
+  </p>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 5. Caixas de veredito (Melhor escolha / Melhor custo-beneficio / Evite se) | Onde usar: no corpo do review/comparativo -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">5 · Melhor escolha / Custo-benefício / Evite</p>
+
+<div class="gci-best">
+  <div class="gci-best__icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 9a6 6 0 0 0 12 0"/><path d="M9 21h6"/><path d="M12 15v6"/><path d="M4 5a2 2 0 0 1-2 2"/><path d="M20 5a2 2 0 0 0 2 2"/></svg>
+  </div>
+  <div class="gci-best__body">
+    <div class="gci-best__label">Melhor escolha geral</div>
+    <h3 class="gci-best__title">Robô Aspirador Kabum Smart 700</h3>
+    <p>Equilíbrio perfeito entre potência de sucção, navegação a laser precisa e base de autoesvaziamento. É o que recomendamos para 9 em cada 10 leitores.</p>
+  </div>
+</div>
+
+<div class="gci-best gci-best--value">
+  <div class="gci-best__icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  </div>
+  <div class="gci-best__body">
+    <div class="gci-best__label">Melhor custo-benefício</div>
+    <h3 class="gci-best__title">Multilaser HOME Robot</h3>
+    <p>Faz o feijão com arroz da limpeza diária por um preço que cabe no bolso. Sem torre de autolimpeza, mas entrega o que promete em apês e casas pequenas.</p>
+  </div>
+</div>
+
+<div class="gci-best gci-best--avoid">
+  <div class="gci-best__icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg>
+  </div>
+  <div class="gci-best__body">
+    <div class="gci-best__label">Evite se...</div>
+    <h3 class="gci-best__title">...você tem tapete felpudo alto</h3>
+    <p>Robôs de entrada travam em tapetes grossos e podem espalhar pelos. Nesse caso, suba para um modelo com sucção acima de 4000 Pa ou prefira um aspirador vertical.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 6. Pros e Contras lado a lado | Onde usar: dentro de cada review de produto -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">6 · Prós e Contras</p>
+
+<div class="gci-proscons">
+  <div class="gci-pros">
+    <h3>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v8H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h3z"/><path d="M7 11l4-7a2 2 0 0 1 3 1.8V8h4.5a2 2 0 0 1 2 2.4l-1.3 6.5a2 2 0 0 1-2 1.6H7"/></svg>
+      Prós
+    </h3>
+    <ul>
+      <li>Mapeamento a laser preciso e rápido de configurar no app</li>
+      <li>Base de autoesvaziamento: até 60 dias sem mexer no lixo</li>
+      <li>Excelente em pelo de pet e cantos</li>
+      <li>Funciona em Wi-Fi 2.4 GHz com Alexa e Google Assistente</li>
+    </ul>
+  </div>
+  <div class="gci-cons">
+    <h3>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 13V5h3a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-3z"/><path d="M17 13l-4 7a2 2 0 0 1-3-1.8V16H5.5a2 2 0 0 1-2-2.4l1.3-6.5a2 2 0 0 1 2-1.6H17"/></svg>
+      Contras
+    </h3>
+    <ul>
+      <li>Torre de autolimpeza ocupa espaço e faz barulho ao esvaziar</li>
+      <li>Sacos descartáveis são um custo recorrente</li>
+      <li>Não passa pano em modo profundo como modelos top de linha</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 7. Nota por criterio (barras) | Onde usar: no fim do review, resumindo a avaliacao -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">7 · Nota por critério</p>
+
+<div class="gci-rating">
+  <div class="gci-rating__head">
+    <h3 class="gci-rating__title">Nossa avaliação técnica</h3>
+    <div class="gci-rating__score"><b>9.1</b><span>/ 10</span></div>
+  </div>
+
+  <div class="gci-rating__row">
+    <span class="gci-rating__label">Potência de sucção</span>
+    <div class="gci-rating__bar"><div class="gci-rating__fill" style="width:92%"></div></div>
+    <span class="gci-rating__num">9.2</span>
+  </div>
+  <div class="gci-rating__row">
+    <span class="gci-rating__label">Navegação / mapa</span>
+    <div class="gci-rating__bar"><div class="gci-rating__fill" style="width:95%"></div></div>
+    <span class="gci-rating__num">9.5</span>
+  </div>
+  <div class="gci-rating__row">
+    <span class="gci-rating__label">Bateria / autonomia</span>
+    <div class="gci-rating__bar"><div class="gci-rating__fill" style="width:88%"></div></div>
+    <span class="gci-rating__num">8.8</span>
+  </div>
+  <div class="gci-rating__row">
+    <span class="gci-rating__label">App e integração</span>
+    <div class="gci-rating__bar"><div class="gci-rating__fill" style="width:90%"></div></div>
+    <span class="gci-rating__num">9.0</span>
+  </div>
+  <div class="gci-rating__row">
+    <span class="gci-rating__label">Custo-benefício</span>
+    <div class="gci-rating__bar"><div class="gci-rating__fill" style="width:85%"></div></div>
+    <span class="gci-rating__num">8.5</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 8. Tabela comparativa responsiva | Onde usar: no TOPO de comparativos "X vs Y" e "melhores ate R$N" (salvavel/compartilhavel) -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">8 · Tabela comparativa</p>
+
+<div class="gci-tabela">
+  <div class="gci-tabela__scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Comparativo</th>
+          <th scope="col">Kabum Smart 700<span class="gci-tabela__pill">Melhor geral</span></th>
+          <th scope="col">Multilaser HOME<span class="gci-tabela__pill">Custo-benefício</span></th>
+          <th scope="col">Positivo Vac Pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gci-tabela__hl">
+          <th scope="row">Faixa de preço</th>
+          <td><span class="gci-tabela__price">R$ 1.800–2.200</span></td>
+          <td><span class="gci-tabela__price">R$ 700–900</span></td>
+          <td><span class="gci-tabela__price">R$ 1.200–1.500</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Destaque</th>
+          <td>Laser + autoesvaziamento</td>
+          <td>Preço imbatível</td>
+          <td>Passa pano vibratório</td>
+        </tr>
+        <tr>
+          <th scope="row">Sucção</th>
+          <td>4000 Pa</td>
+          <td>2000 Pa</td>
+          <td>3000 Pa</td>
+        </tr>
+        <tr>
+          <th scope="row">Nossa nota</th>
+          <td><span class="gci-tabela__star">★ 9.1</span></td>
+          <td><span class="gci-tabela__star">★ 8.2</span></td>
+          <td><span class="gci-tabela__star">★ 8.6</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Onde comprar</th>
+          <td>
+            <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+              Ver preço
+            </a>
+          </td>
+          <td>
+            <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+              Ver preço
+            </a>
+          </td>
+          <td>
+            <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+              Ver preço
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 9. FAQ accordion (sem JS) | Onde usar: fim do artigo. Para SEO, adicione tambem o JSON-LD FAQPage no plugin de schema -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">9 · FAQ (accordion sem JS)</p>
+
+<section class="gci-faq">
+  <h2 class="gci-faq__title">Perguntas frequentes</h2>
+
+  <details>
+    <summary>Robô aspirador funciona em qualquer Wi-Fi?</summary>
+    <div class="gci-faq__a"><p>Na prática, não. A grande maioria dos robôs só conecta na rede <strong>Wi-Fi de 2.4 GHz</strong>. Se o seu roteador junta 2.4 GHz e 5 GHz no mesmo nome, separe as redes ou desligue o 5 GHz temporariamente durante o pareamento.</p></div>
+  </details>
+
+  <details>
+    <summary>Vale a pena pagar mais pela base de autoesvaziamento?</summary>
+    <div class="gci-faq__a"><p>Se você tem pet ou rotina corrida, vale muito: ela esvazia o pó sozinha por semanas. Em apartamentos pequenos sem animais, a diferença de preço pode não compensar — um modelo simples já resolve.</p></div>
+  </details>
+
+  <details>
+    <summary>O robô mapeia a casa toda na primeira limpeza?</summary>
+    <div class="gci-faq__a"><p>Modelos com laser (LiDAR) costumam montar o mapa logo na primeira ou segunda passada. Já os de navegação giroscópica precisam de algumas limpezas e podem errar mais em casas grandes ou com muitos móveis.</p></div>
+  </details>
+
+  <details>
+    <summary>Quanto tempo dura a bateria por limpeza?</summary>
+    <div class="gci-faq__a"><p>Os modelos que recomendamos rendem de <strong>120 a 180 minutos</strong> por carga, suficiente para apês e casas médias. Em áreas maiores, o robô volta sozinho à base, recarrega e retoma de onde parou.</p></div>
+  </details>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 10. Breadcrumb | Onde usar: topo do artigo, logo abaixo do header -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">10 · Breadcrumb</p>
+
+<nav class="gci-breadcrumb" aria-label="Trilha de navegação">
+  <a href="/">Início</a>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  <a href="/categoria/robos-e-limpeza/">Robôs e Limpeza</a>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  <span aria-current="page">Melhores robôs aspiradores de 2026</span>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 11. Leia tambem (cards) | Onde usar: fim do artigo, para linkagem interna por silo. Troque href e <img src> -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">11 · Leia também</p>
+
+<section class="gci-relacionados">
+  <h2 class="gci-relacionados__title">Leia também</h2>
+  <div class="gci-relacionados__grid">
+
+    <a class="gci-card" href="/melhores-cameras-wifi/"><!-- TROQUE href -->
+      <div class="gci-card__thumb">
+        <span class="gci-card__pill">Segurança</span>
+        <img src="https://via.placeholder.com/640x360/0C2236/7DD3FC?text=Camera+Wi-Fi" alt="Câmera de segurança Wi-Fi interna" loading="lazy">
+      </div>
+      <div class="gci-card__body">
+        <h3 class="gci-card__h">As 5 melhores câmeras Wi-Fi para vigiar a casa em 2026</h3>
+        <div class="gci-card__meta">
+          <span class="gci-star">★ 4.8</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 8 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="gci-card" href="/melhores-lampadas-inteligentes/"><!-- TROQUE href -->
+      <div class="gci-card__thumb">
+        <span class="gci-card__pill">Iluminação</span>
+        <img src="https://via.placeholder.com/640x360/091A2E/22C55E?text=Lampada+Smart" alt="Lâmpada inteligente RGB acesa" loading="lazy">
+      </div>
+      <div class="gci-card__body">
+        <h3 class="gci-card__h">Lâmpadas inteligentes: as melhores por menos de R$ 80</h3>
+        <div class="gci-card__meta">
+          <span class="gci-star">★ 4.7</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="gci-card" href="/alexa-vs-google-assistente/"><!-- TROQUE href -->
+      <div class="gci-card__thumb">
+        <span class="gci-card__pill">Assistentes</span>
+        <img src="https://via.placeholder.com/640x360/0C2236/06B6D4?text=Alexa+vs+Google" alt="Smart speaker com assistente de voz" loading="lazy">
+      </div>
+      <div class="gci-card__body">
+        <h3 class="gci-card__h">Alexa vs Google Assistente: qual escolher em 2026?</h3>
+        <div class="gci-card__meta">
+          <span class="gci-star">★ 4.9</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 10 min</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- COMPONENTE: 12. Sticky CTA mobile | Onde usar: cole UMA vez no fim do artigo. Aparece fixo no rodape SO em telas pequenas -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<p class="gci-preview-label">12 · Sticky CTA (mobile) — role no celular para ver fixo no rodapé</p>
+
+<div class="gci-sticky-cta">
+  <div class="gci-sticky-cta__info">
+    <span class="gci-sticky-cta__name">Kabum Smart 700</span>
+    <span class="gci-sticky-cta__price">Nota <b>9.1</b> • melhor escolha geral</span>
+  </div>
+  <a class="gci-cta" href="#" target="_blank" rel="nofollow sponsored noopener"><!-- TROQUE href -->
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h2.2l2.3 13.4a1.8 1.8 0 0 0 1.8 1.5h8.9a1.8 1.8 0 0 0 1.8-1.4l1.8-8.5H6"/></svg>
+    Ver preço
+  </a>
+</div>
+
+</div><!-- /.gci-preview-wrap -->
+</body>
+</html>
